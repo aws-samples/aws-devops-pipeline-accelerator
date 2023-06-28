@@ -1,0 +1,13 @@
+variables:
+  APP_PROJECT: $CI_PROJECT_NAME
+  AWS_REGION: us-east-1
+  DEV_DEPLOY: "false" # false, true, enable/disable DEV env deployment
+  DEV_ENV: "dev"
+  INT_DEPLOY: "false" # false, true, enable/disable INT env deployment
+  INTEGRATION_ENV: "int"
+
+include:
+  - local: shared/utilities.yml
+  - local: aggregators/cf/cf-infrastructure.yml
+
+  

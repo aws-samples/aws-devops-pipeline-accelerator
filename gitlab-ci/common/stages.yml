@@ -1,0 +1,38 @@
+stages:
+  - .pre
+  - Init
+  - Build
+  - Test
+  - test
+  - Package
+  - Verify
+  - Publish
+  - Deployment Preperation
+
+  # Dev environment
+  - DEV Pre-Deploy
+  - DEV Deploy
+  - DEV Post-Deploy
+  - DEV Validation
+  - DEV Destroy
+
+  # Integration environment
+  - INT Pre-Deploy
+  - INT Deploy
+  - INT Post-Deploy
+  - INT Validation
+  - INT Destroy
+
+  # PreProd environment
+  - PREPROD Pre-Deploy
+  - PREPROD Deploy
+  - PREPROD Post-Deploy
+  - PREPROD Validation
+  - PREPROD Destroy
+  
+  # Prod environment
+  - PROD Pre-Deploy
+  - PROD Deploy
+  - PROD Post-Deploy
+  - PROD Validation
+  - PROD Destroy

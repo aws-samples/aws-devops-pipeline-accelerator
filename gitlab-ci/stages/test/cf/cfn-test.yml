@@ -1,0 +1,15 @@
+---
+
+.cfn-lint-test:
+  image: ${DPA_CLOUDFORMATION_DOCKER_IMAGE}
+  variables:
+    CF_TEMPLATES_PATH: PLACEHOLDER
+  script:
+    - cfn-lint.sh
+
+.cfn-nag-test:
+  image: ${DPA_CLOUDFORMATION_DOCKER_IMAGE}
+  variables:
+    CF_TEMPLATES_PATH: PLACEHOLDER
+  script:
+    - cfn-nag.sh

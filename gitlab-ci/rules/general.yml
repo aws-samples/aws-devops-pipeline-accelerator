@@ -1,0 +1,8 @@
+---
+
+.generic:
+  branch-with-mr: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+  branch-without-mr: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null
+  main: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  mr: $CI_PIPELINE_SOURCE == "merge_request_event"
+  tag: $CI_COMMIT_TAG != null

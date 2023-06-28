@@ -1,0 +1,14 @@
+---
+
+include:
+  - template: Security/SAST-IaC.latest.gitlab-ci.yml
+
+kics-iac-sast:
+  stage: test
+  rules:
+    - when: never
+    
+.iac-kics-sast:
+  extends: kics-iac-sast
+  needs: []
+  dependencies: []

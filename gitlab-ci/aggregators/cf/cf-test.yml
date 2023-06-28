@@ -1,0 +1,42 @@
+---
+include:
+  - local: stages/test/cf/cfn-test.yml
+  - local: stages/test/generic/secret-detection-test.yml
+
+'Execute Checkov tests':
+  stage: Test
+  extends: .checkov-test
+
+'Execute CFN LINT':
+  stage: Test
+  extends: .cfn-lint-test
+  variables:
+    CF_TEMPLATES_PATH: templates
+    LINT_RESULTS_FILE: cfn-lint-results.xml
+  artifacts:
+    paths: 
+      - $LINT_RESULTS_FILE
+    reports:
+      junit: $LINT_RESULTS_FILE
+
+'Execute CFN NAG':
+  stage: Test
+  extends: .cfn-nag-test
+  variables:
+    CF_TEMPLATES_PATH: templates
+    CFN_NAG_RESULTS_FILE: cfn-nag-results.json
+  artifacts:
+    paths: 
+      - $CFN_NAG_RESULTS_FILE
+
+'Secret Detection':
+  extends: .secret-detection-test
+  stage: Verify
+  artifacts:
+    paths:
+      - gl-secret-detection-report.json
+
+'Validate with CFN Guard':
+  stage: Verify
+  script:
+    - echo "Linting with CFN Guard"

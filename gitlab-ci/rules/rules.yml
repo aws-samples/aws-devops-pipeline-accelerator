@@ -1,0 +1,5 @@
+---
+include:
+  - local: shared/rules/general.yml
+  - local: shared/rules/terraform.yml
+  

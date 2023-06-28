@@ -1,0 +1,23 @@
+---
+variables:
+  APP_JOB: app
+  
+include:
+  - local: stages/publish/publish-package.yml
+  - local: stages/deploy/terraform/dev-terraform-deployer.yml
+  - local: stages/deploy/terraform/int-terraform-deployer.yml
+
+
+'Update resource groups process mode':
+  stage: Init
+  image: $AWS_ECR_REGISTRY/cft-al2:latest
+  script:
+    - whoami
+    - echo "Update resource groups process mode"
+
+'Package and publish terraform artifact':
+  stage: Publish
+  extends: .archive_and_publish
+  variables:
+    ARTIFACT_NAME: ${COMPONENT_NAME}
+    PATH_TO_ZIP: ${APP_TF_ROOT}

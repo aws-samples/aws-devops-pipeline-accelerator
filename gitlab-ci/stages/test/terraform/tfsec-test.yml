@@ -1,0 +1,17 @@
+---
+
+.tfsec-test:
+  image:
+    name: aquasec/tfsec-ci:v1.26
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  script:
+    - tfsec --soft-fail --include-passed --format default,junit --out tfsec.test
+  artifacts:
+    reports:
+      junit: "tfsec.test.junit"
+    paths:
+      - "tfsec.test.junit"
+  needs: []
+  dependencies: []
