@@ -1,0 +1,16 @@
+---
+variables:
+  APP_PROJECT: $CI_PROJECT_NAME
+  APP_CDK_ROOT: custom-infra-cdk
+  AWS_REGION: us-east-1
+  DEV_DEPLOY: "false" # false, true, enable/disable DEV env deployment
+  INTEGRATION_DEPLOY: "false" # false, automated, manual, delete, plan
+  VARIABLES_FOLDER: variables # Local to APP_CDK_ROOT
+
+include:
+  - local: shared/utilities.yml
+  - local: stages/build/cdk/cdk-build.yml
+  - local: aggregators/cdk/test-cdk.yml
+  - local: aggregators/cdk/cdk-infrastructure.yml
+  - local: aggregators/cdk/deploy-cdk.yml
+  - local: stages/destroy/cdk-destroy.yml

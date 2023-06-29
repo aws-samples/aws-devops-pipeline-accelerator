@@ -21,3 +21,14 @@
     TEST_PIPELINE: "true"
     DPA_BRANCH: $CI_COMMIT_BRANCH
     DEV_DEPLOY: "true"
+
+'CDK Entrypoint Test app':
+  trigger:
+    project: pipelines_focus_grp/pipeline-tools/test-entrypoints/infra-cdk-app
+    branch: main
+    strategy: depend
+  variables:
+    SOURCE_PROJECT: $CI_PROJECT_PATH
+    TEST_PIPELINE: "true"
+    DPA_BRANCH: $CI_COMMIT_BRANCH
+    DEV_DEPLOY: "true"

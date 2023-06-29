@@ -1,0 +1,113 @@
+--- 
+
+include:
+  - local: stages/deploy/cdk/cdk-deployer.yml
+
+'Download CDK Artifact':
+  stage: DEV Pre-Deploy
+  image: ${GITLAB_UTILITIES_DOCKER_IMAGE}
+  variables:
+    ARTIFACT_PACKAGE_URL: ${PACKAGE_REGISTRY_ARTIFACT_BASE_URL}/${COMPONENT_NAME}/${VERSION}/${COMPONENT_NAME}.zip
+    OUTPUT_FILE_NAME: ${COMPONENT_NAME}.zip
+    ZIP_FILE_NAME: ${COMPONENT_NAME}.zip
+    OUTPUT_DIR: ${CDK_DEPLOYMENT_DIR}
+  script:
+    - download-package.sh
+    - unarchive-package.sh
+  artifacts:
+    paths:
+      - ${CDK_DEPLOYMENT_DIR}
+  # rules:
+  #   - if: !reference [ .generic, branch-with-mr ]
+  #     when: on_success
+  #   - if: !reference [.cdk-deploy, tag]
+  #     when: never
+  #   - if: !reference [.cdk-deploy, mr]
+  #     when: on_success
+  #   - if: !reference [.cdk-deploy, branch-without-mr]
+  #     when: on_success
+  #   - if: !reference [.cdk-deploy, main]
+      # when: on_success
+
+'DEV CDK Plan':
+  stage: DEV Pre-Deploy
+  resource_group: dev
+  extends: .cdk-plan
+  variables:
+    AWS_ACCOUNT: $DEV_AWS_ACCOUNT
+    ENVIRONMENT: $DEV_ENVIRONMENT
+    JOB: $APP_JOB
+    PROJECT: $APP_PROJECT
+    ROLE_ARN: $DEV_ARN_ROLE
+    TF_ROOT: $APP_TF_ROOT
+    TEST_PIPELINE: $TEST_PIPELINE
+  dependencies:
+    - 'Download CDK Artifact'
+  needs:
+    - 'Download CDK Artifact'
+  # rules:
+  #   - if: !reference [ .generic, branch-with-mr ]
+  #     when: on_success
+  #   - if: !reference [.dev-cdk-deploy, tag]
+  #     when: never
+  #   - if: !reference [.dev-cdk-deploy, mr]
+  #     when: on_success
+  #   - if: !reference [.dev-cdk-deploy, branch-without-mr]
+  #     when: on_success
+  #   - if: !reference [.dev-cdk-deploy, main]
+  #     when: on_success
+
+'DEV CDK Deploy':
+  stage: DEV Deploy
+  resource_group: dev
+  extends: .cdk-deploy
+  variables:
+    AWS_ACCOUNT: $DEV_AWS_ACCOUNT
+    ENVIRONMENT: $DEV_ENVIRONMENT
+    JOB: $APP_JOB
+    PROJECT: $APP_PROJECT
+    ROLE_ARN: $DEV_ARN_ROLE
+    TF_ROOT: $APP_TF_ROOT
+    TEST_PIPELINE: $TEST_PIPELINE
+  dependencies:
+    - 'DEV CDK Plan'
+    - 'Download CDK Artifact'
+  # rules:
+  #   - if: !reference [ .generic, branch-with-mr ]
+  #     when: never
+  #   - if: !reference [.dev-cdk-deploy, tag]
+  #     when: never
+  #   - if: !reference [.dev-cdk-deploy, mr]
+  #     when: never
+  #   - if: !reference [.dev-cdk-deploy, branch-without-mr]
+  #     when: never
+  #   - if: !reference [.dev-cdk-deploy, main]
+  #     when: on_success
+
+# 'DEV App Destroy':
+#   stage: DEV Destroy
+#   extends: .terraform-destroy
+#   resource_group: dev
+#   environment:
+#     name: ${DEV_ENVIRONMENT}/${APP_PROJECT}/${APP_JOB}
+#     action: stop
+#   variables:
+#     AWS_ACCOUNT: $DEV_AWS_ACCOUNT
+#     ENVIRONMENT: $DEV_ENVIRONMENT
+#     JOB: $APP_JOB
+#     PROJECT: $APP_PROJECT
+#     ROLE_ARN: $DEV_ARN_ROLE
+#     TF_ROOT: $APP_TF_ROOT
+#   dependencies:
+#     - 'Download terraform artifact'
+#   rules:
+#     - if: !reference [ .generic, branch-with-mr ]
+#       when: never
+#     - if: !reference [.dev-terraform-deploy, tag]
+#       when: never
+#     - if: !reference [.dev-terraform-deploy, mr]
+#       when: on_success
+#     - if: !reference [.dev-terraform-deploy, branch-without-mr]
+#       when: on_success
+#     - if: !reference [.dev-terraform-deploy, main]
+#       when: on_success
