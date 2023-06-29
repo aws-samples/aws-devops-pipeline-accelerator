@@ -1,4 +1,0 @@
-{
-    "envType" : "cloudformation",
-    "stage_required" : "true"
-}
