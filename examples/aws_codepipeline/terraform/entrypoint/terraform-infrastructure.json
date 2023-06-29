@@ -1,0 +1,18 @@
+{
+    "envType" : "terraform",
+    "build_stage_required" : "true",
+    "test_stage_required" : "true",
+    "publish_stage_required": "false",
+    "predeploy_stage_required": "false",
+    "deploy_stage_required": "false",
+    "postdeploy_stage_required": "false",
+    "destroy_stage_required": "false",
+    "deploytoprod_stage_required": "true",
+    "account": "971033579102",
+    "roleName": "pipelines_crossaccount_role",
+    "targetregion": "us-west-2",
+    "bucket":"tf-state-dpa",
+    "key":"terraform.tfstate",
+    "region":"us-east-1",
+    "dynamodb_table":"tf-state-dpa"
+}

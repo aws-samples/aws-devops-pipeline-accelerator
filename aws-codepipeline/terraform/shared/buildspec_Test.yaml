@@ -1,0 +1,47 @@
+version: "0.2"
+env:
+  git-credential-helper: "yes"
+  shell: bash
+  
+phases:
+  install:
+    commands:
+      - yum install jq -y
+      - echo "Install tflint"
+      - curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+      - python --version
+      - python3.7 -m pip install -U checkov
+      - checkov -v
+
+  build:
+    commands:
+      - echo "Check The envType"
+      - echo "${CODEBUILD_SRC_DIR}" #Base repo, IAC code
+      - echo "${CODEBUILD_SRC_DIR_SourceOutput1}" #DBM repo, DBM code
+      - "cd ${CODEBUILD_SRC_DIR_SourceOutput1}"
+      - ls -lrt
+      - |
+        ENV_TYPE=$( jq -r '.envType' entrypoint/terraform-infrastructure.json )
+        stage_required=$( jq -r '.test_stage_required' entrypoint/terraform-infrastructure.json )
+        if [ $stage_required == "false" ]; then
+          echo "skipping Test stage....."
+          exit 0
+        else
+          echo "####Starting the Terraform Tests"
+          tflint --init
+          tflint -f junit > tflint_report.xml
+          ls -lrt
+          echo "## VALIDATION : Running checkov ..."
+          checkov -d . -o junitxml  > checkov.xml
+          ls -lrt
+        fi
+
+reports:
+  tflint:
+    files:
+      - tflint_report.xml
+    base-directory: $CODEBUILD_SRC_DIR_SourceOutput1
+  checkov:
+    files:
+      - checkov.xml
+    base-directory: $CODEBUILD_SRC_DIR_SourceOutput1

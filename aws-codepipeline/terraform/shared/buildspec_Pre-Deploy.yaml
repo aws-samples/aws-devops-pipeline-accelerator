@@ -1,0 +1,26 @@
+version: "0.2"
+env:
+  git-credential-helper: "yes"
+  shell: bash
+  
+phases:
+  install:
+    commands:
+      - yum install jq -y
+
+  build:
+    commands:
+      - echo "Check The envType"
+      - echo "${CODEBUILD_SRC_DIR}" #Base repo, IAC code
+      - echo "${CODEBUILD_SRC_DIR_SourceOutput1}" #DBM repo, DBM code
+      - "cd ${CODEBUILD_SRC_DIR_SourceOutput1}"
+      - ls -lrt
+      - |
+        stage_required=$( jq -r '.predeploy_stage_required' entrypoint/terraform-infrastructure.json )
+        if [ $stage_required == "false" ]; then
+          echo "skipping Pre-Deploy stage....."
+          exit 0
+        else
+          terraform init
+          terraform plan -lock=false -out=tfplan
+        fi
