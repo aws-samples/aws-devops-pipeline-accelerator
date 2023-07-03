@@ -1,0 +1,22 @@
+---
+variables:
+  APP_JOB: app
+  
+include:
+  - local: stages/publish/publish-package.yml
+  - local: stages/deploy/cdk/dev-cdk-deployer.yml
+
+
+'Update resource groups process mode':
+  stage: Init
+  image: $AWS_ECR_REGISTRY/cdk:latest
+  script:
+    - whoami
+    - echo "Update resource groups process mode"
+
+'Package and publish cdk artifact':
+  stage: Publish
+  extends: .archive_and_publish
+  variables:
+    ARTIFACT_NAME: ${COMPONENT_NAME}
+    PATH_TO_ZIP: ${APP_CDK_ROOT}

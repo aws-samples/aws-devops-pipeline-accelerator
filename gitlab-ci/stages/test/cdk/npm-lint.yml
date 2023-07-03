@@ -1,0 +1,7 @@
+
+---
+.npm-lint:
+  image:
+    name: $AWS_ECR_REGISTRY/cdk:latest
+  script:
+    - npm-lint.sh

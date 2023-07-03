@@ -1,0 +1,29 @@
+---
+include:
+  - local: stages/test/cdk/npm-test.yml
+  - local: stages/test/cdk/cdk-nag.yml
+  - local: stages/test/cdk/npm-lint.yml
+ 
+'Npm Lint':
+  stage: Test
+  extends: .npm-lint
+
+'Npm Test':
+  stage: Test
+  extends: .npm-test
+
+'CDK Nag':
+  stage: Test
+  extends: .cdk-nag
+  when: always
+  # rules:
+  #   - if: !reference [ .generic, branch-with-mr ]
+  #     when: never
+  #   - if: !reference [.test-checkov-cdk, tag]
+  #     when: never
+  #   - if: !reference [.test-checkov-cdk, mr]
+  #     when: on_success
+  #   - if: !reference [.test-checkov-cdk, branch-without-mr]
+  #     when: on_success
+  #   - if: !reference [.test-checkov-cdk, main]
+      # when: on_success

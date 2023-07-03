@@ -1,0 +1,22 @@
+---
+include:
+  - local: stages/init/aws-configure.yml
+  
+'Configure AWS Access':
+  stage: .pre
+  extends: .generate-ecr-access-token
+
+'Env Vars':
+  stage: Init
+  script:
+    - env
+
+'Publish evidence for secret detection artifact':
+  stage: Publish
+  script:
+    - echo "Publish evidence for secret detection artifact"
+
+'Publish evidence for security tests reports':
+  stage: Publish
+  script:
+    - echo "Publish evidence for security tests reports"

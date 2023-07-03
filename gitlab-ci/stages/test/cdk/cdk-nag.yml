@@ -1,0 +1,7 @@
+
+---
+.cdk-nag:
+  image:
+    name: $AWS_ECR_REGISTRY/cdk:latest
+  script:
+    - cdk-nag.sh

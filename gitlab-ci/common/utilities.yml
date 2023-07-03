@@ -20,3 +20,7 @@ variables:
   DPA_CLOUDFORMATION_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/dpa-cloudformation:latest
   # directory to store extracted terraform artifact files
   TERRAFORM_DEPLOYMENT_DIR: terraform-source-dir
+# image with cdk setup
+  DPA_CDK_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/cdk:latest
+  # directory to store extracted cdk artifact files
+  CDK_DEPLOYMENT_DIR: cdk-source-dir
