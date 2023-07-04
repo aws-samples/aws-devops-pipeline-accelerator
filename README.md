@@ -16,6 +16,9 @@ This will help the teams to focus more on developing features than working on bu
 
 ## Deployment
 
+1. [AWS CodePipeline for deploying Terraform resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/aws-codepipeline/terraform/README.md)
+2. 
+
 ## Use Case
 
 ## Benefits
