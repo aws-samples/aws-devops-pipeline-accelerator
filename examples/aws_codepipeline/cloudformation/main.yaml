@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  BucketName1:
+    Type: String
+    Default: "my-bucket-1"
+  BucketName2:
+    Type: String
+    Default: "my-bucket-2"
+Resources:
+  DataStores:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: nested/s3-1.yaml
+      Parameters:
+          BucketName1: !Ref BucketName1
+  InternalJobs:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: nested/s3-2.yaml
+      Parameters:
+          BucketName2: !Ref BucketName2
