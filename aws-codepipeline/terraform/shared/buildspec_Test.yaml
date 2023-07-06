@@ -21,7 +21,6 @@ phases:
       - "cd ${CODEBUILD_SRC_DIR_SourceOutput1}"
       - ls -lrt
       - |
-        ENV_TYPE=$( jq -r '.envType' entrypoint/terraform-infrastructure.json )
         stage_required=$( jq -r '.test_stage_required' entrypoint/terraform-infrastructure.json )
         if [ $stage_required == "false" ]; then
           echo "skipping Test stage....."
