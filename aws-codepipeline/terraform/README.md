@@ -4,8 +4,8 @@ This folder contians the code and resources on how to build centralised template
 ## Requirements
 1. An AWS Account with necessary permissions/roles to create Codecommit Repositories and CodePipeline components.
 2. To deploy this solution we suggest to have 2 separate CodeCommit repositories
- * First repository will contain the shared libraries, buildspec file and dependencies. Lets call this as the `common-repo`
- * Second repository will contain the Terraform templates to deploy your infrastructure. Lets call this the `app-repo`
+     * First repository will contain the shared libraries, buildspec file and dependencies. Lets call this as the `common-repo`
+     * Second repository will contain the Terraform templates to deploy your infrastructure. Lets call this the `app-repo`
 
 ## Usage
 This folder contains below 2 directories:
