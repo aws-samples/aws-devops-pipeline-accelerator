@@ -42,3 +42,7 @@ This is the main config file, where you can customize and enable/disable a stage
 * Update the `pipeline-modules/terraform.tfvars` 
 * Execute terraform init
 * terraform plan
+* terraform apply
+* After this login to the AWS account an dyou should see the new pipeline created. Note: If she first run is in failed state, just re-excute it once more.
+* Add necessary permissions to the new IAM Role created for Codepipeline. For e.g. the CodePipeline Role should have permissions to create EC2 instance as per the Terrraform template in the examples directory.
+* 

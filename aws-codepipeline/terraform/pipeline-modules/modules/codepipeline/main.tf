@@ -78,38 +78,38 @@ resource "aws_codepipeline" "terraform_pipeline" {
     }
   }
 
-  stage {
-    name = "Approve"
+  # stage {
+  #   name = "Approve"
 
-    action {
-      name     = "Approval"
-      category = "Approval"
-      owner    = "AWS"
-      provider = "Manual"
-      version  = "1"
-      configuration = {
-        CustomData = "${var.approve_comment}"
-      }
-    }
-  }
+  #   action {
+  #     name     = "Approval"
+  #     category = "Approval"
+  #     owner    = "AWS"
+  #     provider = "Manual"
+  #     version  = "1"
+  #     configuration = {
+  #       CustomData = "${var.approve_comment}"
+  #     }
+  #   }
+  # }
 
-  stage {
-    name = "DeployToTest"
-    action {
-      name     = "DeployToTest"
-      category = "Build"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
-      input_artifacts = ["SourceOutput","SourceOutput1"]
-      output_artifacts = ["DeployToTestOutput"]
-      run_order = "6"
-      configuration = {
-        ProjectName = "${var.project_name}-apply"
-        PrimarySource = "SourceOutput"
-      }
-    }
-  }
+  # stage {
+  #   name = "DeployToTest"
+  #   action {
+  #     name     = "DeployToTest"
+  #     category = "Build"
+  #     owner    = "AWS"
+  #     provider = "CodeBuild"
+  #     version  = "1"
+  #     input_artifacts = ["SourceOutput","SourceOutput1"]
+  #     output_artifacts = ["DeployToTestOutput"]
+  #     run_order = "6"
+  #     configuration = {
+  #       ProjectName = "${var.project_name}-apply"
+  #       PrimarySource = "SourceOutput"
+  #     }
+  #   }
+  # }
 }
 
 # Listen for activity on the CodeCommit repo and trigger the CodePipeline

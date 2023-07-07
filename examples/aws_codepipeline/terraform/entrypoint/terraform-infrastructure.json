@@ -1,15 +1,12 @@
 {
-    "envType" : "terraform",
     "build_stage_required" : "true",
     "test_stage_required" : "true",
-    "publish_stage_required": "false",
     "predeploy_stage_required": "false",
     "deploy_stage_required": "false",
     "postdeploy_stage_required": "false",
     "destroy_stage_required": "false",
-    "deploytoprod_stage_required": "true",
     "bucket":"tf-state-dpa",
-    "key":"terraform.tfstate",
+    "key":"terraform_test.tfstate",
     "region":"us-east-1",
     "dynamodb_table":"tf-state-dpa"
 }
