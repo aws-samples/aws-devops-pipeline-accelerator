@@ -22,19 +22,17 @@ To begin with:
 ## Explanation of the `terraform-infrastructure.json` file:
 This is the main config file, where you can customize and enable/disable a stage. Please note that if the stage is disbaled, it will just be skip the execution, but not delete/remove the stage from the Pipeline.
 ```json
-{   
+{
     "build_stage_required" : "true",
     "test_stage_required" : "true",
-    "publish_stage_required": "false",
-    "predeploy_stage_required": "false",
-    "deploy_stage_required": "false",
-    "postdeploy_stage_required": "false",
-    "destroy_stage_required": "false",
-    "deploytoprod_stage_required": "true",
-    "bucket":"tf-state-dpa",                    ## The 
-    "key":"terraform.tfstate",
-    "region":"us-east-1",
-    "dynamodb_table":"tf-state-dpa"
+    "predeploy_stage_required": "true",
+    "deploy_stage_required": "true",
+    "postdeploy_stage_required": "true",
+    "destroy_stage_required": "true",
+    "bucket":"tf-state-dpa",                # S3 bucket used for Terraform backend
+    "key":"terraform_test.tfstate",         # S3 key to be used
+    "region":"us-east-1",       
+    "dynamodb_table":"tf-state-dpa"         # DynamoDB Table for Terraform backend
 }
 ```
 
@@ -44,6 +42,6 @@ This is the main config file, where you can customize and enable/disable a stage
 * terraform plan
 * terraform apply
 * After this login to the AWS account an dyou should see the new pipeline created. Note: If she first run is in failed state, just re-excute it once more.
-* Add necessary permissions to the new IAM Role created for Codepipeline. For e.g. the CodePipeline Role should have permissions to create EC2 instance as per the Terrraform template in the examples directory.
+* Add necessary permissions to the new IAM Role created for CodeBuild. For e.g. the CodePipeline Role should have permissions to create EC2 instance as per the Terrraform template in the examples directory.
 * 
 
