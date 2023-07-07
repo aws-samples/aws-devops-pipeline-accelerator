@@ -4,8 +4,8 @@ This folder contians the code and resources on how to build centralised template
 ## Requirements
 1. An AWS Account with necessary permissions/roles to create Codecommit Repositories and CodePipeline components.
 2. To deploy this solution we suggest to have 2 separate CodeCommit repositories
- * First repository will contain the shared libraries, buildspec file and dependencies. Lets call this as the `common-repo`
- * Second repository will contain the Terraform templates to deploy your infrastructure. Lets call this the `app-repo`
+     * First repository will contain the shared libraries, buildspec file and dependencies. Lets call this as the `common-repo`
+     * Second repository will contain the Terraform templates to deploy your infrastructure. Lets call this the `app-repo`
 
 ## Usage
 This folder contains below 2 directories:
@@ -46,3 +46,4 @@ This is the main config file, where you can customize and enable/disable a stage
 * After this login to the AWS account an dyou should see the new pipeline created. Note: If she first run is in failed state, just re-excute it once more.
 * Add necessary permissions to the new IAM Role created for Codepipeline. For e.g. the CodePipeline Role should have permissions to create EC2 instance as per the Terrraform template in the examples directory.
 * 
+
