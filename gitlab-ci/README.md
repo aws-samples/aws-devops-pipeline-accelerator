@@ -1,4 +1,4 @@
-# GitLab pipelines for deploying Terraform, CDK and CloudFormation IaC templates
+# GitLab CI for deploying Terraform, CDK and CloudFormation IaC templates
 This directory contians GitLab templates as building blocks for deploying Terrafrom, CDK and CloudFormation IaC code.
 
 It contains: 
