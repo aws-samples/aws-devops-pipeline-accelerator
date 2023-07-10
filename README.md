@@ -4,7 +4,7 @@ This repository contains the code and resources on how to build centralised temp
 This will help the teams to focus more on developing features than working on building pipelines for the deployment.
 
 ## Table of content
- * [Principles of DPA](#Principles of DPA)
+ * **[Principles of DPA](#Principles of DPA)**
  * [Requirements](#prerequisites)
  * [Architecture](#architecture)
  * [Deployment](#deployment)

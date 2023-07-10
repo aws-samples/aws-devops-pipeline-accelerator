@@ -19,7 +19,7 @@ To begin with:
 2. In the `app-repo`, create a folder named `entrypoint` and copy the file `.\examples\aws_codepipeline\terraform\entrypoint\terraform-infrastructure.json` into it.
 3. Refer to the `.\examples\aws_codepipeline\terraform` folder for the struture. 
    Please note that in this example, we are creating an EC2 instance defined in the main.tf file.
-4. Clone this Github repository and use the templates under `pipeline-modules` to setup your pipeline as [described here](#Creating Pipeline with all the Stages defined)
+4. Clone this Github repository and use the templates under `pipeline-modules` to setup your pipeline as **[described here](#Creating Pipeline with all the Stages defined)**
 
 
 ## Explanation of the `terraform-infrastructure.json` file:
@@ -39,7 +39,7 @@ This is the main config file, where you can customize and enable/disable a stage
 }
 ```
 
-##Creating Pipeline with all the Stages defined
+## Creating Pipeline with all the Stages defined
 * Update and validate the `pipeline-modules/terraform.tfvars` 
 * Execute below commands :
     * terraform init
