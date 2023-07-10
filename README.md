@@ -4,22 +4,44 @@ This repository contains the code and resources on how to build centralised temp
 This will help the teams to focus more on developing features than working on building pipelines for the deployment.
 
 ## Table of content
- * [Overview](#overview)
+ * [Principles of DPA](#Principles of DPA)
  * [Requirements](#prerequisites)
  * [Architecture](#architecture)
  * [Deployment](#deployment)
- * [Use Case](#use-case)
  * [Benefits](#benefits)
  * [Limitations](#limitations)
- 
+
+## Principles of DPA
+1. Deployments to environments must be consistent and use same artifacts for deployment
+2. Each job in pipeline should run in specific Docker containers
+3. DPA has been designed to work with feature branch based branching model
+
+DPA contains below few important modules in code :
+
+## Entrypoints
+
+Entrypoints in DPA represets specific IaC pipeline strating point that will be consumed by application. Entrypoint consists of aggregators and various stages.
+
+## Aggregators
+
+Aggregators in DPA is collection of jobs managed by stages, there are multiple  wrappers that forms entrypoint for specific IaC pipeline.
+
+## Stages
+
+Stages contain actual building blocks that form the jobs inside stages. Each stage represent specific execution of pipeline jobs.
+
 ## Requirements
+
+1. An AWS Account with necessary permissions/roles that will be used to provision resources using IaC templates
+
+## Architecture
 
 ## Deployment
 
 1. [AWS CodePipeline for deploying Terraform resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/aws-codepipeline/terraform/README.md)
 2. 
 
-## Use Case
+
 
 ## Benefits
 
