@@ -1,0 +1,12 @@
+Parameters:
+  BucketName2:
+    Description: s3 bucket name
+    Type: String
+    Default: "my-bucket-ekna"
+
+Resources:
+  s3Bucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      AccessControl: Private
+      BucketName: !Sub "${BucketName2}"
