@@ -20,54 +20,54 @@ phases:
       - ls -l
       - |
         ENV_TYPE=$( jq -r '.envType' entrypoint/config.json )
-        stage_required=$( jq -r '.stage_required' entrypoint/config.json )
+        init_stage_required=$( jq -r '.init_stage_required' entrypoint/config.json )
         cft_s3_bucket=$( jq -r '.cft_s3_bucket' entrypoint/config.json )
         stack_name=$( jq -r '.stack_name' entrypoint/config.json )
-        if [ $stage_required == "false" ]; then
+        if [ $init_stage_required == "false" ]; then
             echo "skipping the stage"
             exit 0
+        else
+            if [ $ENV_TYPE == "terraform" ]; then 
+                  echo "terraform"
+            elif [ $ENV_TYPE == "cloudformation" ]; then
+                  echo "cloudformation"
+                  cfn-lint -t *.yaml
+                  exitcode=$?
+                  if [ $exitcode = 2 ]; then
+                     echo "template has exit code 2 linting error"
+                     exit
+                  elif [ $exitcode = 6 ]; then
+                     echo "template has exit code 6 linting error and warning"
+                     exit
+                  elif [ $exitcode = 10 ]; then
+                     echo "template has exit code 10 error and informational"
+                     exit
+                  elif [ $exitcode = 14 ]; then
+                     echo "template has exit code 14 error and a warning and informational"
+                     exit
+                  fi
+                  cfn-lint -t nested/*.yaml
+                  exitcode=$?
+                  if [ $exitcode = 2 ]; then
+                     echo "template has exit code 2 linting error"
+                     exit
+                  elif [ $exitcode = 6 ]; then
+                     echo "template has exit code 6 linting error and warning"
+                     exit
+                  elif [ $exitcode = 10 ]; then
+                     echo "template has exit code 10 error and informational"
+                     exit
+                  elif [ $exitcode = 14 ]; then
+                     echo "template has exit code 14 error and a warning and informational"
+                     exit
+                  fi
+            elif [ $ENV_TYPE == "cdk" ]; then
+                  echo "cdk"
+            else 
+               exit 1
+               echo "check the envType variable input in the config.json file"
+            fi 
         fi
-        if [ $ENV_TYPE == "terraform" ]; then 
-            echo "terraform"
-        elif [ $ENV_TYPE == "cloudformation" ]; then
-            echo "cloudformation"
-            cfn-lint -t *.yaml
-            exitcode=$?
-            if [ $exitcode = 2 ]; then
-               echo "template has exit code 2 linting error"
-               exit
-            elif [ $exitcode = 6 ]; then
-               echo "template has exit code 6 linting error and warning"
-               exit
-            elif [ $exitcode = 10 ]; then
-               echo "template has exit code 10 error and informational"
-               exit
-            elif [ $exitcode = 14 ]; then
-               echo "template has exit code 14 error and a warning and informational"
-               exit
-            fi
-            cfn-lint -t nested/*.yaml
-            exitcode=$?
-            if [ $exitcode = 2 ]; then
-               echo "template has exit code 2 linting error"
-               exit
-            elif [ $exitcode = 6 ]; then
-               echo "template has exit code 6 linting error and warning"
-               exit
-            elif [ $exitcode = 10 ]; then
-               echo "template has exit code 10 error and informational"
-               exit
-            elif [ $exitcode = 14 ]; then
-               echo "template has exit code 14 error and a warning and informational"
-               exit
-            fi
-        elif [ $ENV_TYPE == "cdk" ]; then
-            echo "cdk"
-        else 
-           exit 1
-           echo "check the envType variable input in the config.json file"
-        fi 
-        
   post_build:
     commands:
       - echo "Display Last Changes"

@@ -1,5 +1,5 @@
 # AWS CodePipeline for deploying CloudFormation resources
-This folder contians the code and resources on how to build centralised templates for your infrastructure deployment pipeline using Terraform and AWS CodePipeline.
+This folder contians the code and resources on how to build centralised templates for your infrastructure deployment pipeline using CloudFormation and AWS CodePipeline.
 
 ## Requirements
 1. An AWS Account with necessary permissions/roles to create Codecommit Repositories and CodePipeline components.
@@ -38,10 +38,22 @@ This is the main config file, where you can customize and enable/disable a stage
 ```
 
 ## Creating Pipeline with all the Stages defined
-* Update the `pipeline-modules/terraform.tfvars` 
-* Execute terraform init
-* terraform plan
-* terraform apply
-* After this login to the AWS account an dyou should see the new pipeline created. Note: If she first run is in failed state, just re-excute it once more.
+Once we have the information filled then we are good to go with Pipeline creation. To create the pipeline we need to use the “pipeline-cft.yaml” file. Please deploy the CloudFormation template, below mentioned are the necessary Parameters to be passed to the stack.
+
+  ArtifactsBucket:
+    Description: Name of the repo where the pipeline artifacts to be updated contains.
+  EcrDockerRepository:
+    Description: ECR Docker repository name for the CodeBuild image
+  CodeCommitAppRepo:
+    Description: CodeCommit repository name which contains the templates
+  CodeCommitBaseRepo:
+    Description: CodeCommit repository name which contains the shared files
+  CodeCommitRepoBranch:
+    Description: CodeCommit repository branch name
+  SNSMailAddress:
+    Description: email address to receive SNS notification for pipeline approval.
+
+
+* After this login to the AWS account and you should see the new pipeline created. Note: If she first run is in failed state, just re-excute it once more.
 * Add necessary permissions to the new IAM Role created for CodeBuild. For e.g. the Cross Account IAM Role should have permissions to create S3 buckets as per the Terrraform template in the examples directory.
 
