@@ -1,0 +1,23 @@
+---
+variables:
+  DEV_AWS_ACCOUNT: 316172404479
+  DEV_ARN_ROLE: arn:aws:iam::316172404479:role/dpa-gitlab-access-role
+  DEV_DEPLOY: "plan"
+  DEV_ENVIRONMENT: "dev"
+  AWS_CREDS_TARGET_ROLE: arn:aws:iam::316172404479:role/dpa-gitlab-access-role
+  CDK_TEST_CHECKOV: "false"
+  CDK_TEST_TERRASCAN: "true"
+
+include:
+  # - local: .dpa.yml
+  - project: pipelines_focus_grp/devops_pipeline_accelerator
+    ref: $DPA_BRANCH
+    file: entrypoints/gitlab/cdk-infrastructure.yml
+    rules:
+      - if: '$SOURCE_PROJECT == "pipelines_focus_grp/devops_pipeline_accelerator" && $CI_PIPELINE_SOURCE == "pipeline" && $TEST_PIPELINE == "true"'
+  
+  - project: pipelines_focus_grp/devops_pipeline_accelerator
+    ref: cdk-new-format
+    file: entrypoints/gitlab/cdk-infrastructure.yml
+    rules:
+      - if: $TEST_PIPELINE != "true"
