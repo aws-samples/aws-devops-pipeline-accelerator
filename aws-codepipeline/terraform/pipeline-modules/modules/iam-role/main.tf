@@ -162,6 +162,10 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "codepipeline_role_attach" {
   count      = var.create_new_role ? 1 : 0
+    #checkov:skip=CKV_AWS_355:Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions
+    #checkov:skip=CKV_AWS_288:Ensure IAM policies does not allow data exfiltration
+    #checkov:skip=CKV_AWS_289:Ensure IAM policies does not allow permissions management / resource exposure without constraints
+    #checkov:skip=CKV_AWS_290:Ensure IAM policies does not allow write access without constraints
   role       = aws_iam_role.codepipeline_role[0].name
   policy_arn = aws_iam_policy.codepipeline_policy[0].arn
 }

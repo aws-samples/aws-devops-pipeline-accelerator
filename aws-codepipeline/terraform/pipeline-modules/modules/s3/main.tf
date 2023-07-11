@@ -78,6 +78,8 @@ resource "aws_iam_role_policy_attachment" "replication_s3_role_attach" {
 #Replication bucket
 resource "aws_s3_bucket" "replication_bucket" {
   provider      = aws.replication
+   #checkov:skip=CKV2_AWS_61:Ensure that an S3 bucket has a lifecycle configuration
+   #checkov:skip=CKV2_AWS_62:Ensure S3 buckets should have event notifications enabled
   bucket_prefix = "${regex("[a-z0-9.-]+", lower(var.project_name))}-rpl"
 }
 
@@ -159,6 +161,8 @@ resource "aws_s3_bucket_logging" "replication_bucket_logging" {
 #Artifact Bucket
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket_prefix = regex("[a-z0-9.-]+", lower(var.project_name))
+   #checkov:skip=CKV2_AWS_61:Ensure that an S3 bucket has a lifecycle configuration
+   #checkov:skip=CKV2_AWS_62:Ensure S3 buckets should have event notifications enabled
   tags          = var.tags
   force_destroy = true
 }

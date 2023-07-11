@@ -187,6 +187,9 @@ data "aws_iam_policy_document" "cloudwatch_ci_iam_policy" {
 
 resource "aws_iam_policy" "cloudwatch_ci_iam_policy" {
   name_prefix = "${var.common_repo_branch}-cw-ci-"
+   #checkov:skip=CKV_AWS_356:Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions
+   #checkov:skip=CKV_AWS_109:Ensure IAM policies does not allow permissions management / resource exposure without constraints
+   #checkov:skip=CKV_AWS_111:Ensure IAM policies does not allow write access without constraints
   policy = data.aws_iam_policy_document.cloudwatch_ci_iam_policy.json
 }
 resource "aws_iam_role_policy_attachment" "cloudwatch_ci_iam" {

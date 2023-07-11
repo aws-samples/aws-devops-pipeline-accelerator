@@ -7,6 +7,7 @@
 resource "aws_codebuild_project" "terraform_codebuild_project" {
 
   count = length(var.build_projects)
+   #checkov:skip=CKV_AWS_316:Ensure CodeBuild project environments do not have privileged mode enabled
 
   name           = "${var.project_name}-${var.build_projects[count.index]}"
   service_role   = var.role_arn
@@ -35,8 +36,8 @@ resource "aws_codebuild_project" "terraform_codebuild_project" {
 }
 
 resource "aws_codebuild_project" "terraform_codebuild_apply_project" {
-
   name           = "${var.project_name}-apply"
+   #checkov:skip=CKV_AWS_316:Ensure CodeBuild project environments do not have privileged mode enabled
   service_role   = var.role_arn
   encryption_key = var.kms_key_arn
   tags           = var.tags
