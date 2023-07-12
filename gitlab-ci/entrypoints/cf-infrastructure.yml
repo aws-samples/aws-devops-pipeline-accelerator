@@ -7,7 +7,7 @@ variables:
   INTEGRATION_ENV: "int"
 
 include:
-  - local: shared/utilities.yml
-  - local: aggregators/cf/cf-infrastructure.yml
+  - local: gitlab-ci/common/utilities.yml
+  - local: gitlab-ci/aggregators/cf/cf-infrastructure.yml
 
   

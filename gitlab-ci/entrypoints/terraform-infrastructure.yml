@@ -14,8 +14,8 @@ variables:
   TERRAFORM_TEST_KICS: "true" # true enabled kics tests in pipeline
 
 include:
-  - local: shared/utilities.yml
-  - local: stages/build/terraform/terraform-build.yml
-  - local: aggregators/terraform/test-terraform.yml
-  - local: aggregators/terraform/terraform-infrastructure.yml
-  - local: aggregators/terraform/deploy-terraform.yml
+  - local: gitlab-ci/common/utilities.yml
+  - local: gitlab-ci/stages/build/terraform/terraform-build.yml
+  - local: gitlab-ci/aggregators/terraform/test-terraform.yml
+  - local: gitlab-ci/aggregators/terraform/terraform-infrastructure.yml
+  - local: gitlab-ci/aggregators/terraform/deploy-terraform.yml

@@ -1,7 +1,7 @@
 --- 
 
 include:
-  - local: stages/deploy/terraform/terraform-deployer.yml
+  - local: gitlab-ci/stages/deploy/terraform/terraform-deployer.yml
 
 
 'DEV Terraform Plan':

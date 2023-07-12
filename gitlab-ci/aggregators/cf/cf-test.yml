@@ -1,7 +1,7 @@
 ---
 include:
-  - local: stages/test/cf/cfn-test.yml
-  - local: stages/test/generic/secret-detection-test.yml
+  - local: gitlab-ci/stages/test/cf/cfn-test.yml
+  - local: gitlab-ci/stages/test/generic/secret-detection-test.yml
 
 'Execute Checkov tests':
   stage: Test

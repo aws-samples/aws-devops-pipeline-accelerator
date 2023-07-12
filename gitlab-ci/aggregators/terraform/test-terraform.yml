@@ -1,11 +1,11 @@
 ---
 include:
-  - local: stages/test/terraform/iac-kics-sast.yml
-  - local: stages/test/generic/checkov-test.yml
-  - local: stages/test/terraform/tfsec-test.yml
-  - local: stages/test/terraform/terrascan-test.yml
-  - local: stages/test/generic/secret-detection-test.yml
-  - local: stages/test/generic/policy-scan-test.yml
+  - local: gitlab-ci/stages/test/terraform/iac-kics-sast.yml
+  - local: gitlab-ci/stages/test/generic/checkov-test.yml
+  - local: gitlab-ci/stages/test/terraform/tfsec-test.yml
+  - local: gitlab-ci/stages/test/terraform/terrascan-test.yml
+  - local: gitlab-ci/stages/test/generic/secret-detection-test.yml
+  - local: gitlab-ci/stages/test/generic/policy-scan-test.yml
  
 
 'IAC SAST - KICS':

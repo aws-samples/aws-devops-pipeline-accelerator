@@ -1,14 +1,14 @@
 ---
 
 include:
-  - project: pipelines_focus_grp/devops_pipeline_accelerator
+  - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
     ref: $DPA_BRANCH
-    file: entrypoints/gitlab/cf-infrastructure.yml
+    file: gitlab-ci/entrypoints/cf-infrastructure.yml
     rules:
       - if: '$SOURCE_PROJECT == "pipelines_focus_grp/devops_pipeline_accelerator" && $CI_PIPELINE_SOURCE == "pipeline" && $TEST_PIPELINE == "true"'
   
-  - project: pipelines_focus_grp/devops_pipeline_accelerator
-    ref: feature/cf-pipeline-structure
-    file: entrypoints/gitlab/cf-infrastructure.yml
+  - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
+    ref: feature/gitlab-pipeline-structure
+    file: gitlab-ci/entrypoints/cf-infrastructure.yml
     rules:
       - if: $TEST_PIPELINE != "true"

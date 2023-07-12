@@ -3,9 +3,9 @@ variables:
   APP_JOB: app
   
 include:
-  - local: stages/publish/publish-package.yml
-  - local: stages/deploy/terraform/dev-terraform-deployer.yml
-  - local: stages/deploy/terraform/int-terraform-deployer.yml
+  - local: gitlab-ci/stages/publish/publish-package.yml
+  - local: gitlab-ci/stages/deploy/terraform/dev-terraform-deployer.yml
+  - local: gitlab-ci/stages/deploy/terraform/int-terraform-deployer.yml
 
 
 'Update resource groups process mode':
