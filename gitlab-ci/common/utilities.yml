@@ -1,7 +1,7 @@
 ---
 include:
-  - local: shared/stages.yml
-  - local: shared/rules/rules.yml
+  - local: gitlab-ci/common/stages.yml
+  - local: gitlab-ci/rules/rules.yml
 
 variables:
    # component name, repository project name, required to publish the artifact
