@@ -5,5 +5,5 @@
   script:
     - validate-template.sh
   variables:
-    CF_TEMPLATE_DIR: templates
+    CF_TEMPLATE_DIR: ${TEMPLATES_ROOT_DIR}
   

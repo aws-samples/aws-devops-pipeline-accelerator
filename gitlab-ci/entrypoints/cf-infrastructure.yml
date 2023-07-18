@@ -5,6 +5,7 @@ variables:
   DEV_ENV: "dev"
   INT_DEPLOY: "false" # false, true, enable/disable INT env deployment
   INTEGRATION_ENV: "int"
+  TEMPLATES_ROOT_DIR: templates
 
 include:
   - local: gitlab-ci/common/utilities.yml
