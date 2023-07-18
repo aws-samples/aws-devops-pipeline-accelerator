@@ -19,5 +19,5 @@ include:
   stage: Publish
   extends: .archive_and_publish
   variables:
-    ARTIFACT_NAME: ${COMPONENT_NAME}/examples/gitlab_ci/terraform/infra-terraform-app
-    PATH_TO_ZIP: ${APP_TF_ROOT}
+    ARTIFACT_NAME: ${COMPONENT_NAME}
+    PATH_TO_ZIP: ${COMPONENT_NAME}/examples/gitlab_ci/terraform/infra-terraform-app/${APP_TF_ROOT}
