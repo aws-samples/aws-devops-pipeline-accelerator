@@ -22,4 +22,9 @@ resource "aws_instance" "ec2_fg" {
     #checkov:skip=CCKV_AWS_79:Ensure Instance Metadata Service Version 1 is not enabled
     #checkov:skip=CCKV2_AWS_41:Ensure an IAM role is attached to EC2 instance
   instance_type = var.instance_type
+  
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens   = "required"
+  }
 }
