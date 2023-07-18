@@ -2,6 +2,7 @@
 variables:
   APP_PROJECT: $CI_PROJECT_NAME
   APP_TF_ROOT: terraform
+  APP_TF_ROOT_DIR: terraform # this can be overriden by application as define where terraform scripts located
   AWS_REGION: us-east-1
   DEV_DEPLOY: "false" # false, true, enable/disable DEV env deployment
   DEV_ENV: "dev"

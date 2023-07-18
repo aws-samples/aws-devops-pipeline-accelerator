@@ -20,4 +20,4 @@ include:
   extends: .archive_and_publish
   variables:
     ARTIFACT_NAME: ${COMPONENT_NAME}
-    PATH_TO_ZIP: examples/gitlab_ci/terraform/infra-terraform-app/${APP_TF_ROOT}
+    PATH_TO_ZIP: ${APP_TF_ROOT_DIR}

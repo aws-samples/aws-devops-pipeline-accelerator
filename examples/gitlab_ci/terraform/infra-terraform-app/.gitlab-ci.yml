@@ -12,7 +12,7 @@ variables:
   AWS_CREDS_TARGET_ROLE: arn:aws:iam::448599500132:role/dpa-gitlab-access-role
   TERRAFORM_TEST_CHECKOV: "false"
   TERRAFORM_TEST_TERRASCAN: "true"
-
+  APP_TF_ROOT_DIR: examples/gitlab_ci/terraform/infra-terraform-app/terraform
 include:
   # - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
   #   ref: $DPA_BRANCH
