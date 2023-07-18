@@ -15,7 +15,7 @@ variables:
   # image name with version for utilities docker image
   GITLAB_UTILITIES_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/dpa-utilities:latest
   # image with Terraform setup
-  DPA_TERRAFORM_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/dpa-terraform:al2
+  DPA_TERRAFORM_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/dpa-terraform:latest
   # image with CLoudformation setup
   DPA_CLOUDFORMATION_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/dpa-cloudformation:latest
   # directory to store extracted terraform artifact files
