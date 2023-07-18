@@ -3,7 +3,7 @@ default:
 
 .terraform:
   variables:
-    TF_DIR: ${TERRAFORM_DEPLOYMENT_DIR}/${TF_ROOT}
+    TF_DIR: ${TERRAFORM_DEPLOYMENT_DIR}/${APP_TF_ROOT_DIR}
   id_tokens:
     AWS_WEB_ITENTITY_TOKEN:
       aud: https://gitlab.aws.dev
