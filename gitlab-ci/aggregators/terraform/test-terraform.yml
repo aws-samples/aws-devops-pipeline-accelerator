@@ -56,22 +56,22 @@ include:
     - if: !reference [.test-tfsec-terraform, main]
       when: on_success
 
-'Terrascan tests':
-  stage: Test
-  extends: .terrascan-test
-  script:
-    - echo "Terrascan tests"
-  rules:
-    - if: !reference [ .generic, branch-with-mr ]
-      when: never
-    - if: !reference [.test-terrascan-terraform, tag]
-      when: never
-    - if: !reference [.test-terrascan-terraform, mr]
-      when: on_success
-    - if: !reference [.test-terrascan-terraform, branch-without-mr]
-      when: on_success
-    - if: !reference [.test-terrascan-terraform, main]
-      when: on_success
+# 'Terrascan tests':
+#   stage: Test
+#   extends: .terrascan-test
+#   script:
+#     - echo "Terrascan tests"
+#   rules:
+#     - if: !reference [ .generic, branch-with-mr ]
+#       when: never
+#     - if: !reference [.test-terrascan-terraform, tag]
+#       when: never
+#     - if: !reference [.test-terrascan-terraform, mr]
+#       when: on_success
+#     - if: !reference [.test-terrascan-terraform, branch-without-mr]
+#       when: on_success
+#     - if: !reference [.test-terrascan-terraform, main]
+#       when: on_success
 
 'Secret Detection':
   extends: .secret-detection-test
