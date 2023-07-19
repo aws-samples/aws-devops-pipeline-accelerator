@@ -27,6 +27,8 @@ include:
 'Checkov - tests':
   stage: Test
   extends: .checkov-test
+  variables:
+    IAC_ROOT_PATH: ${APP_TF_ROOT_DIR}
   rules:
     - if: !reference [ .generic, branch-with-mr ]
       when: never

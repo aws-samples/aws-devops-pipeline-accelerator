@@ -16,7 +16,7 @@
         - '**/serverless.yml'
         - '**/serverless.yaml'
   script:
-    - checkov -d . -o junitxml | tee checkov.test.xml
+    - checkov -d ${IAC_ROOT_PATH} -o junitxml | tee checkov.test.xml
   artifacts:
     reports:
       junit: checkov.test.xml
