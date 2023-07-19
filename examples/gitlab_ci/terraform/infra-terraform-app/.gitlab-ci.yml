@@ -10,7 +10,7 @@ variables:
   INT_DEPLOY: "true"
   INT_ENV: "dev"
   AWS_CREDS_TARGET_ROLE: arn:aws:iam::448599500132:role/dpa-gitlab-access-role
-  TERRAFORM_TEST_CHECKOV: "false"
+  TERRAFORM_TEST_CHECKOV: "true"
   TERRAFORM_TEST_TERRASCAN: "true"
   APP_TF_ROOT_DIR: examples/gitlab_ci/terraform/infra-terraform-app/terraform
 include:
