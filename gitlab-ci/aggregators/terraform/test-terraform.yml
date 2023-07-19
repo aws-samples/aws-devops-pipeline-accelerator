@@ -8,7 +8,7 @@ include:
   - local: gitlab-ci/stages/test/generic/policy-scan-test.yml
  
 
-'IAC SAST - KICS':
+'KICS Sast':
   stage: Test
   extends: .iac-kics-sast
   when: always
@@ -24,7 +24,7 @@ include:
     - if: !reference [.test-kics-terraform, main]
       when: on_success
 
-'Checkov - tests':
+'Checkov':
   stage: Test
   extends: .checkov-test
   variables:
@@ -41,7 +41,7 @@ include:
     - if: !reference [.test-checkov-terraform, main]
       when: on_success
 
-'TFSec tests':
+'TFSec':
   stage: Test
   extends: .tfsec-test
   rules:
