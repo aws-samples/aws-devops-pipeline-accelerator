@@ -52,14 +52,3 @@ default:
   artifacts:
     paths:
       - ${TERRAFORM_DEPLOYMENT_DIR}
-  rules:
-    - if: !reference [ .generic, branch-with-mr ]
-      when: on_success
-    - if: !reference [.deploy-terraform, tag]
-      when: never
-    - if: !reference [.deploy-terraform, mr]
-      when: on_success
-    - if: !reference [.deploy-terraform, branch-without-mr]
-      when: on_success
-    - if: !reference [.deploy-terraform, main]
-      when: on_success

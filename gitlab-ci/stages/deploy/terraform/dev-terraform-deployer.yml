@@ -20,17 +20,6 @@ include:
     - 'Download deployment artifact'
   needs:
     - 'Download deployment artifact'
-  rules:
-    - if: !reference [ .generic, branch-with-mr ]
-      when: on_success
-    - if: !reference [.dev-terraform-deploy, tag]
-      when: never
-    - if: !reference [.dev-terraform-deploy, mr]
-      when: on_success
-    - if: !reference [.dev-terraform-deploy, branch-without-mr]
-      when: on_success
-    - if: !reference [.dev-terraform-deploy, main]
-      when: on_success
 
 'DEV Terraform apply':
   stage: DEV Deploy
@@ -47,17 +36,6 @@ include:
   dependencies:
     - 'DEV Terraform Plan'
     - 'Download deployment artifact'
-  rules:
-    - if: !reference [ .generic, branch-with-mr ]
-      when: never
-    - if: !reference [.dev-terraform-deploy, tag]
-      when: never
-    - if: !reference [.dev-terraform-deploy, mr]
-      when: never
-    - if: !reference [.dev-terraform-deploy, branch-without-mr]
-      when: never
-    - if: !reference [.dev-terraform-deploy, main]
-      when: on_success
 
 # 'DEV App Destroy':
 #   stage: DEV Destroy
