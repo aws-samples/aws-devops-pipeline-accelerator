@@ -5,7 +5,7 @@
     "envType" : "cloudformation",
     "cft_s3_bucket" : "pipeline-bucket",               
     "stack_name" : "aws-cft-poc",                    
-    "account" : "123456789012",                        
+    "account" : "************",                        
     "roleName" : "codestack-poc-cross-account-role",  
     "region" : "us-east-1",
     "destroy_stack" : "false" 

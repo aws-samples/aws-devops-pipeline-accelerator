@@ -397,15 +397,14 @@ Resources:
               - Resource: "*"
                 Effect: Allow
                 Action: 
-                  - ecr:*
+                  - "ecr:GetDownloadUrlForLayer"
+                  - "ecr:BatchGetImage"
+                  - "ecr:ListImages"
+                  - "ecr:GetAuthorizationToken"
               - Resource: "*"
                 Effect: Allow
                 Action: 
-                  - sts:*
-              - Resource: "*"
-                Effect: Allow
-                Action: 
-                  - cloudformation:*
+                  - sts:AssumeRole
               - Effect: Allow
                 Action:
                   - sns:Publish
@@ -468,4 +467,7 @@ Resources:
               - Resource: "*"
                 Effect: Allow
                 Action: 
-                  - ecr:*
+                  - "ecr:GetDownloadUrlForLayer"
+                  - "ecr:BatchGetImage"
+                  - "ecr:ListImages"
+                  - "ecr:GetAuthorizationToken"

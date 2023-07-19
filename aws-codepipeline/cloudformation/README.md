@@ -13,7 +13,7 @@ This folder contains below 2 directories:
  * `shared`             ## the Ready-to-use Buildspec files.
 
 To begin with:
-1. Create a folder named shared and copy all the Buildspec files from the `shared` folder into the `common-repo/shared` folder
+1. Create a folder named shared and copy all the Buildspec files from the `shared` folder into the `common-repo/` folder
 2. In the `app-repo`, create a folder named `entrypoint` and copy the file .\examples\aws_codepipeline\cloudformation\entrypoint\config.json into it.
 3. Refer to the `.\examples\aws_codepipeline\cloudformation` folder for the struture. Please note that using this example we are creating S3 buckets.
 4. You can clone this repository and use the templates under `pipeline-modules` to setup your pipeline
@@ -30,7 +30,7 @@ This is the main config file, where you can customize and enable/disable a stage
     "stage_required" : "true",
     "cft_s3_bucket" : "pipeline-bucket",               #S3 bucket from the destination account to keep CFT templates
     "stack_name" : "aws-cft-poc",                      #CloudFormation stack name
-    "account" : "123456789012",                        #Destination AWS account to deploy stack
+    "account" : "************",                        #Destination AWS account to deploy stack
     "roleName" : "codestack-poc-cross-account-role",   #Cross account IAM role name
     "region" : "us-east-1",
     "destroy_stack" : "false"                          #To destroy the provisioned stack this value set to be "true"
