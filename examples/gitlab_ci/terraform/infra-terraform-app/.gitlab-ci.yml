@@ -10,18 +10,16 @@ variables:
   INT_DEPLOY: "true"
   INT_ENV: "dev"
   AWS_CREDS_TARGET_ROLE: arn:aws:iam::448599500132:role/dpa-gitlab-access-role
-  TERRAFORM_TEST_CHECKOV: "false"
+  TERRAFORM_TEST_CHECKOV: "true"
   TERRAFORM_TEST_TERRASCAN: "true"
-
+  APP_TF_ROOT_DIR: examples/gitlab_ci/terraform/infra-terraform-app/terraform
 include:
-  - project: pipelines_focus_grp/devops_pipeline_accelerator
-    ref: $DPA_BRANCH
-    file: entrypoints/gitlab/cf-infrastructure.yml
-    rules:
-      - if: '$SOURCE_PROJECT == "pipelines_focus_grp/devops_pipeline_accelerator" && $CI_PIPELINE_SOURCE == "pipeline" && $TEST_PIPELINE == "true"'
+  # - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
+  #   ref: $DPA_BRANCH
+  #   file: gitlab-ci/entrypoints/terraform-infrastructure.yml
+  #   rules:
+  #     - if: '$SOURCE_PROJECT == "pipelines_focus_grp/aws-devops-pipeline-accelerator" && $CI_PIPELINE_SOURCE == "pipeline" && $TEST_PIPELINE == "true"'
   
-  - project: pipelines_focus_grp/devops_pipeline_accelerator
-    ref: feature/terrafom-deployments
-    file: entrypoints/gitlab/cf-infrastructure.yml
-    rules:
-      - if: $TEST_PIPELINE != "true"
+  - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
+    ref: feature/gitlab-pipeline-structure
+    file: gitlab-ci/entrypoints/terraform-infrastructure.yml

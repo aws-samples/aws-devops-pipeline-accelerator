@@ -2,8 +2,8 @@
 
 'Terraform Entrypoint Test app':
   trigger:
-    project: pipelines_focus_grp/pipeline-tools/test-entrypoints/infra-terraform-app
-    branch: feature/terraform-deploy-jobs
+    include:
+      - examples/gitlab_ci/terraform/infra-terraform-app/.gitlab-ci.yml
     strategy: depend
   variables:
     SOURCE_PROJECT: $CI_PROJECT_PATH
@@ -13,8 +13,8 @@
 
 'CloudFormation Entrypoint Test app':
   trigger:
-    project: pipelines_focus_grp/pipeline-tools/test-entrypoints/infra-cloudformation-app
-    branch: main
+    include: 
+      - examples/gitlab_ci/cloudformation/infra-cloudformation-app/.gitlab-ci.yml
     strategy: depend
   variables:
     SOURCE_PROJECT: $CI_PROJECT_PATH
@@ -22,13 +22,13 @@
     DPA_BRANCH: $CI_COMMIT_BRANCH
     DEV_DEPLOY: "true"
 
-'CDK Entrypoint Test app':
-  trigger:
-    project: pipelines_focus_grp/pipeline-tools/test-entrypoints/infra-cdk-app
-    branch: main
-    strategy: depend
-  variables:
-    SOURCE_PROJECT: $CI_PROJECT_PATH
-    TEST_PIPELINE: "true"
-    DPA_BRANCH: $CI_COMMIT_BRANCH
-    DEV_DEPLOY: "true"
+# 'CDK Entrypoint Test app':
+#   trigger:
+#     project: pipelines_focus_grp/pipeline-tools/test-entrypoints/infra-cdk-app
+#     branch: main
+#     strategy: depend
+#   variables:
+#     SOURCE_PROJECT: $CI_PROJECT_PATH
+#     TEST_PIPELINE: "true"
+#     DPA_BRANCH: $CI_COMMIT_BRANCH
+#     DEV_DEPLOY: "true"

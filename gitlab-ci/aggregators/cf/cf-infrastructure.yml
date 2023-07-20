@@ -1,19 +1,21 @@
 ---
 include:
-  - local: stages/init/aws-configure.yml
-  - local: stages/build/cf/cf-build.yml
-  - local: aggregators/cf/cf-test.yml
-  - local: stages/test/generic/checkov-test.yml
+  - local: gitlab-ci/stages/init/aws-configure.yml
+  - local: gitlab-ci/stages/build/cf/cf-build.yml
+  - local: gitlab-ci/aggregators/cf/cf-test.yml
+  - local: gitlab-ci/stages/test/generic/checkov-test.yml
+  - local: gitlab-ci/stages/publish/publish-package.yml
   
 'Configure AWS Access':
   stage: .pre
   extends: .generate-ecr-access-token
 
-
 'Package and publish CloudFormation artifact':
   stage: Publish
-  script:
-    - echo "Package and publish CloudFormation artifact"
+  extends: .archive_and_publish
+  variables:
+    ARTIFACT_NAME: ${COMPONENT_NAME}
+    PATH_TO_ZIP: ${TEMPLATES_ROOT_DIR}
 
 'Publish evidence for CFN_LINT':
   stage: Publish

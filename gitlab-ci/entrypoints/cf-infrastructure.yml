@@ -5,9 +5,10 @@ variables:
   DEV_ENV: "dev"
   INT_DEPLOY: "false" # false, true, enable/disable INT env deployment
   INTEGRATION_ENV: "int"
+  TEMPLATES_ROOT_DIR: templates
 
 include:
-  - local: shared/utilities.yml
-  - local: aggregators/cf/cf-infrastructure.yml
+  - local: gitlab-ci/common/utilities.yml
+  - local: gitlab-ci/aggregators/cf/cf-infrastructure.yml
 
   

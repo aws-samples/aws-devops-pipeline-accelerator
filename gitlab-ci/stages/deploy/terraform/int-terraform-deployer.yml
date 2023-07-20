@@ -1,6 +1,6 @@
 --- 
 include:
-  - local: stages/deploy/terraform/terraform-deployer.yml
+  - local: gitlab-ci/stages/deploy/terraform/terraform-deployer.yml
 
 
 'INT Terraform Plan':
@@ -19,17 +19,6 @@ include:
     - 'Download deployment artifact'
   needs:
     - 'Download deployment artifact'
-  rules:
-    - if: !reference [ .generic, branch-with-mr ]
-      when: on_success
-    - if: !reference [.int-terraform-deploy, tag]
-      when: never
-    - if: !reference [.int-terraform-deploy, mr]
-      when: on_success
-    - if: !reference [.int-terraform-deploy, branch-without-mr]
-      when: on_success
-    - if: !reference [.int-terraform-deploy, main]
-      when: on_success
 
 'INT Terraform apply':
   stage: INT Deploy
@@ -46,14 +35,3 @@ include:
   dependencies:
     - 'INT Terraform Plan'
     - 'Download deployment artifact'
-  rules:
-    - if: !reference [ .generic, branch-with-mr ]
-      when: never
-    - if: !reference [.int-terraform-deploy, tag]
-      when: never
-    - if: !reference [.int-terraform-deploy, mr]
-      when: never
-    - if: !reference [.int-terraform-deploy, branch-without-mr]
-      when: never
-    - if: !reference [.int-terraform-deploy, main]
-      when: on_success

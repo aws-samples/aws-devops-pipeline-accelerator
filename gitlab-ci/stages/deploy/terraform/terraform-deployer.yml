@@ -3,7 +3,7 @@ default:
 
 .terraform:
   variables:
-    TF_DIR: ${TERRAFORM_DEPLOYMENT_DIR}/${TF_ROOT}
+    TF_DIR: ${TERRAFORM_DEPLOYMENT_DIR}/${APP_TF_ROOT_DIR}
   id_tokens:
     AWS_WEB_ITENTITY_TOKEN:
       aud: https://gitlab.aws.dev
@@ -52,14 +52,3 @@ default:
   artifacts:
     paths:
       - ${TERRAFORM_DEPLOYMENT_DIR}
-  rules:
-    - if: !reference [ .generic, branch-with-mr ]
-      when: on_success
-    - if: !reference [.deploy-terraform, tag]
-      when: never
-    - if: !reference [.deploy-terraform, mr]
-      when: on_success
-    - if: !reference [.deploy-terraform, branch-without-mr]
-      when: on_success
-    - if: !reference [.deploy-terraform, main]
-      when: on_success
