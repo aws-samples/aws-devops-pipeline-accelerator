@@ -40,7 +40,8 @@ This is the main config file, where you can customize and enable/disable a stage
 ```
 
 ## Creating Pipeline with all the Stages defined
-* Update and validate the `pipeline-modules/terraform.tfvars` 
+* Update and validate the `pipeline-modules/terraform.tfvars`
+* Create a Docker image as directed here and update the **builder_image** variable defined in `pipeline-modules/terraform.tfvars`
 * Execute below commands :
     * terraform init
     * terraform plan
