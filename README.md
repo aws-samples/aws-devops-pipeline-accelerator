@@ -4,29 +4,29 @@ This repository contains the code and resources on how to build centralised temp
 This will help the teams to focus more on developing features than working on building pipelines for the deployment.
 
 ## Table of content
- * [Principles of DPA](#Principles of DPA)
- * [Requirements](#prerequisites)
+ * [Principles of DPA](#principles)
+ * [Requirements](#requirements)
  * [Architecture](#architecture)
  * [Deployment](#deployment)
  * [Benefits](#benefits)
  * [Limitations](#limitations)
 
-## Principles of DPA
+## Principles
 1. Deployments to environments must be consistent and use same artifacts for deployment
 2. Each job in pipeline should run in specific Docker containers
 3. DPA has been designed to work with feature branch based branching model
 
 DPA contains below few important modules in code :
 
-## Entrypoints
+### Entrypoints
 
 Entrypoints in DPA represets specific IaC pipeline strating point that will be consumed by application. Entrypoint consists of aggregators and various stages.
 
-## Aggregators
+### Aggregators
 
 Aggregators in DPA is collection of jobs managed by stages, there are multiple  wrappers that forms entrypoint for specific IaC pipeline.
 
-## Stages
+### Stages
 
 Stages contain actual building blocks that form the jobs inside stages. Each stage represent specific execution of pipeline jobs.
 
@@ -35,7 +35,8 @@ Stages contain actual building blocks that form the jobs inside stages. Each sta
 1. An AWS Account with necessary permissions/roles that will be used to provision resources using IaC templates
 
 ## Architecture
-<img width="947" alt="image" src="https://github.com/aws-samples/aws-devops-pipeline-accelerator/assets/106240341/e1fa742a-c8e7-4ff0-bb81-724c061feaac">
+<img width="947" alt="image" src="https://github.com/aws-samples/aws-devops-pipeline-accelerator/assets/106240341/217c927d-3e1d-4f95-8cce-34560da9ea0d">
+
 
 ## Deployment
 
@@ -44,14 +45,14 @@ Stages contain actual building blocks that form the jobs inside stages. Each sta
 3. [Gitlab CI for deploying Terraform, CDK and CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md)
 
 ## Benefits
-1. **Standardisation & consistency** : standardised pipeline for any type of application brings in consistency in application deployment
-2. **Reusability** : Entire solution is reusable and scalable in nature. Accelerators can be consumed by applications to orchestrate pipeline
-3. **Velocity** : Application team can focus more on to developing app than worrying about building pipeline of the application that will be improve velocity of application
-4. **Security** : Built in quality gates that secures quality of the application deployment with DevSecOps concepts
-5. **Scalability** : Outcome of this entire solution would be configurable templates which are highly scalable and can easily integrate with any type of application that supports CI/CD pipeline for chosen platform.
+1. ***Standardisation & consistency*** : standardised pipeline for any type of application brings in consistency in application deployment
+2. ***Reusability*** : Entire solution is reusable and scalable in nature. Accelerators can be consumed by applications to orchestrate pipeline
+3. ***Velocity*** : Application team can focus more on to developing app than worrying about building pipeline of the application that will be improve velocity of application
+4. ***Security*** : Built in quality gates that secures quality of the application deployment with DevSecOps concepts
+5. ***Scalability*** : Outcome of this entire solution would be configurable templates which are highly scalable and can easily integrate with any type of application that supports CI/CD pipeline for chosen platform.
 
 ## Limitations
-First release supports (provides reuasble code) for only AWS CodePipeline and Gitlab CI platforms.
+First release supports (provides reuasble code) only for AWS CodePipeline and Gitlab CI platforms.
 
 ## Security
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
