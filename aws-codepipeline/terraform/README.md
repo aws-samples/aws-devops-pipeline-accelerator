@@ -1,5 +1,5 @@
 # AWS CodePipeline for deploying Terraform IAC resources
-This directory contians the code and resources on how to build centralised templates for your infrastructure deployment pipeline using Terraform and AWS CodePipeline.
+This directory contains the code and resources on how to build centralised templates for your infrastructure deployment pipeline using ***Terraform and AWS CodePipeline***.
 
 ## Requirements
 1. An AWS Account with necessary permissions/roles to create Codecommit Repositories and CodePipeline components.
