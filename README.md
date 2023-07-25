@@ -19,27 +19,24 @@ This will help the teams to focus more on developing features than working on bu
 DPA contains below few important modules in code :
 
 ### Entrypoints
-
 Entrypoints in DPA represets specific IaC pipeline strating point that will be consumed by application. Entrypoint consists of aggregators and various stages.
 
 ### Aggregators
-
 Aggregators in DPA is collection of jobs managed by stages, there are multiple  wrappers that forms entrypoint for specific IaC pipeline.
 
 ### Stages
-
 Stages contain actual building blocks that form the jobs inside stages. Each stage represent specific execution of pipeline jobs.
 
 ## Requirements
 
 1. An AWS Account with necessary permissions/roles that will be used to provision resources using IaC templates
+2. Docker Image created and pushed to ECR as [outlined here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/shared-docker/docker-images/README.md)
 
 ## Architecture
 <img width="947" alt="image" src="https://github.com/aws-samples/aws-devops-pipeline-accelerator/assets/106240341/217c927d-3e1d-4f95-8cce-34560da9ea0d">
 
 
 ## Deployment
-
 1. [AWS CodePipeline for deploying Terraform resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/aws-codepipeline/terraform/README.md)
 2. [AWS CodePipeline for deploying CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/aws-codepipeline/terraform/README.md)
 3. [Gitlab CI for deploying Terraform, CDK and CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md)
@@ -52,7 +49,7 @@ Stages contain actual building blocks that form the jobs inside stages. Each sta
 5. ***Scalability*** : Outcome of this entire solution would be configurable templates which are highly scalable and can easily integrate with any type of application that supports CI/CD pipeline for chosen platform.
 
 ## Limitations
-First release supports (provides reuasble code) only for AWS CodePipeline and Gitlab CI platforms.
+1. First release supports (provides reuasble code) only for AWS CodePipeline and Gitlab CI platforms.
 
 ## Security
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
