@@ -2,7 +2,7 @@
 This directory contains the Dockerfile and resources required to build the Docker image, which is used in the respective CodeBuild and Gitlab jobs. Using this custom image will speed up the Build install stage, which will be much faster than installing the binaries during the pipeline execution process.
 
 ## Requirements
-1. Docker cli and docker engine should be installed and available.
+1. [Docker cli and docker engine](https://docs.docker.com/engine/install/) should be installed and available.
 2. An AWS Account with necessary permissions/roles to create Elastic Container Registry and push Docker image.
 
 ## Description
