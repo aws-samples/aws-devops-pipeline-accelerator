@@ -1,8 +1,8 @@
 ---
 include:
-  - local: stages/test/cdk/npm-test.yml
-  - local: stages/test/cdk/cdk-nag.yml
-  - local: stages/test/cdk/npm-lint.yml
+  - local: gitlab-ci/stages/test/cdk/npm-test.yml
+  - local: gitlab-ci/stages/test/cdk/cdk-nag.yml
+  - local: gitlab-ci/stages/test/cdk/npm-lint.yml
  
 'Npm Lint':
   stage: Test

@@ -3,15 +3,13 @@ default:
 
 .cdk:
   variables:
-    CDK_DIR: ${CDK_DEPLOYMENT_DIR}
+    #CDK_DIR: ${CDK_DEPLOYMENT_DIR}/examples/gitlab_ci/cdk/infra-cdk-app
+    CDK_DIR: examples/gitlab_ci/cdk/infra-cdk-app
   id_tokens:
     AWS_WEB_ITENTITY_TOKEN:
       aud: https://gitlab.aws.dev
   cache:
     key: ${CI_COMMIT_REF_SLUG}-${ENVIRONMENT}-${JOB}
-    paths:
-      - "${CDK_DIR}/.cdk/"
-      - "${CDK_DIR}/.cdk.lock.hcl"
 
 .cdk-plan:
   extends: .cdk
@@ -20,9 +18,9 @@ default:
   environment:
     name: ${ENVIRONMENT}/${PROJECT}/${JOB}
     action: prepare
-  artifacts:
-    paths:
-      - ${CDK_DIR}/cdk-plan.cache
+  # artifacts:
+  #   paths:
+  #     - ${CDK_DIR}/cdk-plan.cache
 
 .cdk-deploy:
   extends: .cdk
@@ -33,10 +31,10 @@ default:
     action: start
   artifacts:
     paths:
-      - custom-infra-cdk
+      - ${CDK_DIR}
 
 .cdk-destroy:
   extends: .cdk
   script:
-    - cd custom-infra-cdk
+    - cd ${CDK_DIR}
     - cdk destroy --force

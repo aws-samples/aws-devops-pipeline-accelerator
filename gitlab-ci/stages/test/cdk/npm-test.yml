@@ -8,7 +8,7 @@
     - ls
   artifacts:
     reports:
-      junit: "custom-infra-cdk/coverage/clover.xml"
+      junit: "cdk/coverage/clover.xml"
     paths:
-      - "custom-infra-cdk/coverage/clover.xml"
-      - shared/custom-infra-cdk
+      - "cdk/coverage/clover.xml"
+      - shared/cdk

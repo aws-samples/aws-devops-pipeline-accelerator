@@ -1,6 +1,6 @@
 ---
 include:
-  - local: stages/init/aws-configure.yml
+  - local: gitlab-ci/stages/init/aws-configure.yml
   
 'Configure AWS Access':
   stage: .pre

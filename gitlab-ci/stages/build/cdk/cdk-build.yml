@@ -4,8 +4,11 @@
   stage: Build
   image: $AWS_ECR_REGISTRY/cdk:latest
   script:
-    - ls
     - cdk-build.sh
+    # - echo "for artifact ${CDK_DIR}"
+  artifacts:
+    paths:
+      - ${CDK_DIR}
 
 'CDK Version Validate':
   stage: Build

@@ -1,7 +1,7 @@
 --- 
 
 include:
-  - local: stages/deploy/cdk/cdk-deployer.yml
+  - local: gitlab-ci/stages/deploy/cdk/cdk-deployer.yml
 
 'Download CDK Artifact':
   stage: DEV Pre-Deploy
@@ -17,6 +17,7 @@ include:
   artifacts:
     paths:
       - ${CDK_DEPLOYMENT_DIR}
+
   # rules:
   #   - if: !reference [ .generic, branch-with-mr ]
   #     when: on_success
@@ -35,12 +36,10 @@ include:
   extends: .cdk-plan
   variables:
     AWS_ACCOUNT: $DEV_AWS_ACCOUNT
-    ENVIRONMENT: $DEV_ENVIRONMENT
+    ENVIRONMENT: $DEV_ENV
     JOB: $APP_JOB
     PROJECT: $APP_PROJECT
     ROLE_ARN: $DEV_ARN_ROLE
-    TF_ROOT: $APP_TF_ROOT
-    TEST_PIPELINE: $TEST_PIPELINE
   dependencies:
     - 'Download CDK Artifact'
   needs:
@@ -63,11 +62,11 @@ include:
   extends: .cdk-deploy
   variables:
     AWS_ACCOUNT: $DEV_AWS_ACCOUNT
-    ENVIRONMENT: $DEV_ENVIRONMENT
+    ENVIRONMENT: $DEV_ENV
     JOB: $APP_JOB
     PROJECT: $APP_PROJECT
     ROLE_ARN: $DEV_ARN_ROLE
-    TF_ROOT: $APP_TF_ROOT
+    CDK_ROOT: $APP_CDK_ROOT
     TEST_PIPELINE: $TEST_PIPELINE
   dependencies:
     - 'DEV CDK Plan'
