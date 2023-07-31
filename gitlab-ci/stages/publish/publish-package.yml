@@ -8,7 +8,7 @@
     # the file to zip, set at least one of FILE_TO_ZIP, PATH_TO_ZIP
     FILE_TO_ZIP:
     # the path to zip, set at least one of FILE_TO_ZIP, PATH_TO_ZIP
-    PATH_TO_ZIP: examples/gitlab_ci/cdk
+    PATH_TO_ZIP:
     # overriden UPLOAD_FILE
     UPLOAD_FILE: ${BUILD_ARTIFACTS_PATH}/${ARTIFACT_NAME}.zip
     # package url combined from defined params
