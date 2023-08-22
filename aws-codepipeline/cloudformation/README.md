@@ -54,6 +54,6 @@ Once we have the information filled then we are good to go with Pipeline creatio
     Description: email address to receive SNS notification for pipeline approval.
 
 
-* After this login to the AWS account and you should see the new pipeline created. Note: If she first run is in failed state, just re-excute it once more.
+* After this login to the AWS account and you should see the new pipeline created.
 * Add necessary permissions to the new IAM Role created for CodeBuild. For e.g. the Cross Account IAM Role should have permissions to create S3 buckets as per the Terrraform template in the examples directory.
 
