@@ -2,10 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   BucketName1:
     Type: String
-    Default: "my-bucket-1"
+    Default: "pipeline-accelerator-1"
   BucketName2:
     Type: String
-    Default: "my-bucket-2"
+    Default: "pipeline-accelerator-2"
 Resources:
   DataStores:
     Type: AWS::CloudFormation::Stack

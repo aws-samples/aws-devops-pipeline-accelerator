@@ -2,7 +2,7 @@ Parameters:
   BucketName2:
     Description: s3 bucket name
     Type: String
-    Default: "my-bucket-ekna"
+    Default: "pipeline-accelerator-2"
 
 Resources:
   s3Bucket:
