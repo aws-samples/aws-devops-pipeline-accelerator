@@ -1,4 +1,4 @@
-project_name       = "devops_pipeline_accelerator_test"
+project_name       = "devops_pipeline_accelerator_tech"
 environment        = "dev"
 backend_s3_bucket_arn = "arn:aws:s3:::tf-state-dpa"
 backend_ddb_arn    = "arn:aws:dynamodb:us-east-1:316172404479:table/tf-state-dpa"

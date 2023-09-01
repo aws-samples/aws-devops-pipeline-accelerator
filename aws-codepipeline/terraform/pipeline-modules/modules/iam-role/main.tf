@@ -36,13 +36,14 @@ EOF
 resource "aws_iam_policy" "codepipeline_policy" {
   count       = var.create_new_role ? 1 : 0
   # name        = "${var.project_name}-codepipeline-policy"
-  name      = var.iam_policy_name
-  description = "Policy to allow codepipeline to execute"
-  tags        = var.tags
   #checkov:skip=CKV_AWS_355:Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions
   #checkov:skip=CKV_AWS_288:Ensure IAM policies does not allow data exfiltration
   #checkov:skip=CKV_AWS_289:Ensure IAM policies does not allow permissions management / resource exposure without constraints
   #checkov:skip=CKV_AWS_290:Ensure IAM policies does not allow write access without constraints
+  name      = var.iam_policy_name
+  description = "Policy to allow codepipeline to execute"
+  tags        = var.tags
+  policy    = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
