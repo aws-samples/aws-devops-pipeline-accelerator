@@ -3,6 +3,9 @@
 This repository contains the code and resources on how to build centralised templates for your infrastructure deployment pipeline, for various types of Infrastructure as a Code Tools. These templates can be consumed by various teams to orchestrate their Infrastructure build and deployment pipelines with the standard/basic required configurations. 
 This will help the teams to focus more on developing features than working on building pipelines for the deployment.
 
+DPA Solution is basically build around 3 pillars - Entrypoints, Aggregators and Stages.
+1. Entrypoint is the Configuration file which you can use to Customize the Default Pipeline as per the requirements of each Appplication. This is the file which resides in your Application Repository. All other files/configurations explained further in this Solution would reside in the Common Repository or Pipeline Repository.
+
 ## Table of content
  * [Principles of DPA](#principles)
  * [Prerequisites](#prerequisites)
