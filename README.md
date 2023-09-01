@@ -5,7 +5,7 @@ This will help the teams to focus more on developing features than working on bu
 
 ## Table of content
  * [Principles of DPA](#principles)
- * [Requirements](#requirements)
+ * [Prerequisites](#prerequisites)
  * [Architecture](#architecture)
  * [Deployment](#deployment)
  * [Benefits](#benefits)
@@ -20,21 +20,34 @@ DPA contains below few important modules in code :
 
 ### Entrypoints
 Entrypoints in DPA represets specific IaC pipeline strating point that will be consumed by application. Entrypoint consists of aggregators and various stages.
+This is the Configuration file which you need to add in your Application Repository and used for Customizing the various pre-defined stages.
+
+***Example Entrypoint files : ***
+1. https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/examples/aws_codepipeline/terraform/entrypoint/terraform-infrastructure.json
+2. https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/entrypoints/terraform-infrastructure.yml
 
 ### Aggregators
-Aggregators in DPA is collection of jobs managed by stages, there are multiple  wrappers that forms entrypoint for specific IaC pipeline.
+Aggregators in DPA is a collection of jobs managed by stages, there are multiple wrappers that forms entrypoint for specific IaC pipeline.
 
 ### Stages
 Stages contain actual building blocks that form the jobs inside stages. Each stage represent specific execution of pipeline jobs.
+***Default Stages provisioned for a Single Environment (dev) are mentioned below ***. You can customize the pre-defined stages in the Entrypoint configuration provided above. And this is explained in detail in the Deployment Section for individual types of Deployment below. (Please follow the links as per your requirements)
+1. Init
+2. Build
+3. Test
+4. PreDeploy, Package, Publish
+5. Deploy
+6. Verify
+7. Manual Approval
+8. Destroy
 
-## Requirements
+## Prerequisites 
 
 1. An AWS Account with necessary permissions/roles that will be used to provision resources using IaC templates
 2. Docker Image created and pushed to ECR as [outlined here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/shared-docker/docker-images/README.md)
 
 ## Architecture
 <img width="947" alt="image" src="https://github.com/aws-samples/aws-devops-pipeline-accelerator/assets/106240341/217c927d-3e1d-4f95-8cce-34560da9ea0d">
-
 
 ## Deployment
 1. [AWS CodePipeline for deploying Terraform resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/aws-codepipeline/terraform/README.md)
