@@ -20,7 +20,7 @@ resource "aws_codebuild_project" "terraform_codebuild_project" {
     compute_type                = var.builder_compute_type
     image                       = var.builder_image
     type                        = var.builder_type
-    privileged_mode             = true
+    privileged_mode             = false
     image_pull_credentials_type = var.builder_image_pull_credentials_type
   }
   logs_config {
@@ -48,7 +48,7 @@ resource "aws_codebuild_project" "terraform_codebuild_apply_project" {
     compute_type                = var.builder_compute_type
     image                       = var.builder_image
     type                        = var.builder_type
-    privileged_mode             = true
+    privileged_mode             = false
     image_pull_credentials_type = var.builder_image_pull_credentials_type
   }
   logs_config {
