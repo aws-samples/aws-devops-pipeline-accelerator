@@ -67,6 +67,8 @@ Stages contain actual building blocks that form the jobs inside stages. Each sta
 ## Limitations
 1. First release supports (provides reuasble code) only for AWS CodePipeline and Gitlab CI platforms.
 
+## Next steps (Backlog)
+
 ## Access Management
 
 ## Multi-account/Multi-region
