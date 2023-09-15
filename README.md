@@ -81,11 +81,11 @@ The pipeline stops/exits on encountering a failure at any of the below stages. T
 
 ## Access Management
 There are multiple aspects of accesses while working or using DPA templates:
-* Role based access to be configured for pipeline visibility and execution of workflows irrespective of platform
-* Service account to be used for pipeline execution and deployment to cloud environments
-* Pipelines uses least privileges IAM roles to access AWS resources like ECR docker images, SNS and distribution list in pipeline job execution
-* Pipelines should be protected with limited access to avoid unwanted updates on pipeline configs and deletion
-* Gitlab to AWS Integration is via the Environment variables configured and explained [here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md#usage)
+1. Role based access to be configured for pipeline visibility and execution of workflows irrespective of platform
+2. Service account to be used for pipeline execution and deployment to cloud environments
+3. Pipelines uses least privileges IAM roles to access AWS resources like ECR docker images, SNS and distribution list in pipeline job execution
+4. Pipelines should be protected with limited access to avoid unwanted updates on pipeline configs and deletion
+5. Gitlab to AWS Integration is via the Environment variables configured and explained [here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md#usage)
 
 ## Examples
 There is an Examples folder included in this solution to showcase how to integrate/use the DPA solution in your repositories. 
