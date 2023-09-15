@@ -7,15 +7,23 @@ DPA Solution is basically build around 3 pillars - Entrypoints, Aggregators and 
 1. Entrypoint is the Configuration file which you can use to Customize the Default Pipeline as per the requirements of each Appplication. This is the file which resides in your Application Repository. All other files/configurations explained further in this Solution would reside in the Common Repository or Pipeline Repository.
 
 ## Table of content
- * [Principles of DPA](#principles)
- * [Prerequisites](#prerequisites)
- * [Architecture](#architecture)
- * [Deployment](#deployment)
- * [Benefits](#benefits)
- * [Limitations](#limitations)
- * [Next-Steps(Backlog)](#backlog)
- * [Access Management](#accessmanagement)
- * [Examples](#examples)
+- [DevOps Pipeline Accelerator (DPA)](#devops-pipeline-accelerator-dpa)
+  - [Table of content](#table-of-content)
+  - [Principles](#principles)
+    - [Entrypoints](#entrypoints)
+    - [Aggregators](#aggregators)
+    - [Stages](#stages)
+  - [Prerequisites](#prerequisites)
+  - [Architecture](#architecture)
+  - [Deployment](#deployment)
+  - [Benefits](#benefits)
+  - [Limitations](#limitations)
+  - [Backlog](#backlog)
+  - [Access Management](#access-management)
+  - [Examples](#examples)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Contributors](#contributors)
 
 ## Principles
 1. Deployments to environments must be consistent and use same artifacts for deployment
@@ -56,7 +64,7 @@ The pipeline stops/exits on encountering a failure at any of the below stages. T
 2. Docker Image created and pushed to ECR as [outlined here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/shared-docker/docker-images/README.md)
 
 ## Architecture
-<img width="947" alt="image" src="https://github.com/aws-samples/aws-devops-pipeline-accelerator/assets/106240341/217c927d-3e1d-4f95-8cce-34560da9ea0d">
+<img width="947" alt="image" src="images/Architecture.png">
 
 ## Deployment
 1. [AWS CodePipeline for deploying Terraform resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/aws-codepipeline/terraform/README.md)
@@ -71,7 +79,7 @@ The pipeline stops/exits on encountering a failure at any of the below stages. T
 5. ***Scalability*** : Outcome of this entire solution would be configurable templates which are highly scalable and can easily integrate with any type of infrastructure that supports CI/CD pipeline for chosen platform.
 
 ## Limitations
-1. First release supports (provides reuasble code) only for AWS CodePipeline and Gitlab CI platforms.
+1. First release supports (provides reusable code) only for AWS CodePipeline and Gitlab CI platforms.
 
 ## Backlog
 * Workflow templates for Infrastructure based applications for Amazon CodeCatalyst, Github Actions and Jenkins
