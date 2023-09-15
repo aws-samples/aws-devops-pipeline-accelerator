@@ -1,4 +1,4 @@
-# Docker image creation for using it in CodeBuild
+# Docker image creation for using in CodeBuild
 This directory contains the Dockerfile and resources required to build the Docker image, which is used in the respective CodeBuild and Gitlab jobs. Using this custom image will speed up the Build install stage, which will be much faster than installing the binaries during the pipeline execution process.
 
 ## Requirements
@@ -25,5 +25,11 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
 docker push <ECR Repo url>:1
 ```
 
-Repaet the above mentioned steps in the respectivesub directories to create the other docker images, based on the IAC tool you choose. 
+Repeat the above mentioned steps in the respective sub-directories to create the other docker images, based on the IAC tool you choose. 
 Note: Please update the docker image tag and ECR repo url according to the directory.
+
+## Notes
+1. As these Docker Images will be uploaded in the End-users AWS ECR repo, patching and making sure they are up-to-date is your responsibility.
+2. This solution has a variable to read the Docker Image name, so you can use your own Docker image as well.
+3. [Docker best practices followed](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+4. 
