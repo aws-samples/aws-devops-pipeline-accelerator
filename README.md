@@ -15,6 +15,7 @@ DPA Solution is basically build around 3 pillars - Entrypoints, Aggregators and 
  * [Limitations](#limitations)
  * [Next-Steps(Backlog)](#backlog)
  * [Access Management](#accessmanagement)
+ * [Examples](#examples)
 
 ## Principles
 1. Deployments to environments must be consistent and use same artifacts for deployment
@@ -60,11 +61,11 @@ Stages contain actual building blocks that form the jobs inside stages. Each sta
 3. [Gitlab CI for deploying Terraform, CDK and CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md)
 
 ## Benefits
-1. ***Standardisation & consistency*** : standardised pipeline for any type of application brings in consistency in application deployment
-2. ***Reusability*** : Entire solution is reusable and scalable in nature. Accelerators can be consumed by applications to orchestrate pipeline
-3. ***Velocity*** : Application team can focus more on to developing app than worrying about building pipeline of the application that will be improve velocity of application
-4. ***Security*** : Built in quality gates that secures quality of the application deployment with DevSecOps concepts
-5. ***Scalability*** : Outcome of this entire solution would be configurable templates which are highly scalable and can easily integrate with any type of application that supports CI/CD pipeline for chosen platform.
+1. ***Standardisation & consistency*** : Standardised Pipeline for any type of Infrastructure brings in consistency in infrastructure deployment.
+2. ***Reusability*** : Entire solution is reusable and scalable in nature. Accelerators can be consumed to orchestrate the pipeline.
+3. ***Velocity*** : Application team can focus more on to developing app than worrying about building pipeline, which will improve the velocity of the team.
+4. ***Security*** : Built in quality-gates that secures quality of the infrastructure deployment with DevSecOps concepts
+5. ***Scalability*** : Outcome of this entire solution would be configurable templates which are highly scalable and can easily integrate with any type of infrastructure that supports CI/CD pipeline for chosen platform.
 
 ## Limitations
 1. First release supports (provides reuasble code) only for AWS CodePipeline and Gitlab CI platforms.
@@ -74,7 +75,7 @@ Stages contain actual building blocks that form the jobs inside stages. Each sta
 * Java based application pipeline templates that deploys to container ecosystem like ECS and EKS
 * Frontend UI based application pipeline templates for deployment to AWS environments
 * Workflow templates for infrastructure based applications for Amazon CodeCatalyst
-* Enable multi account and cross region provsioning and deployment 
+* Enable Multi-Account and Cross-Region provsioning and deployment 
 
 ## Access Management
 There are multiple aspects of accesses while working or using DPA templates:
@@ -83,7 +84,14 @@ There are multiple aspects of accesses while working or using DPA templates:
 * Pipelines uses least privileges IAM roles to access AWS resources like ECR docker images, SNS and distribution list in pipeline job execution
 * Pipelines should be protected with limited access to avoid unwanted updates on pipeline configs and deletion
 
-## Security
+## Examples
+There is an Examples folder included in this solution to showcase how to integrate/use the DPA solution in your repositories. 
+As this is just an Example and not part of the solution, it contains just the basic usage/code of resources like EC2, S3 etc. It is recommended to follow best-practices while creating any resource in your AWS account
+* [S3 bucket best practices](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html)
+* [EC2 best practices](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-best-practices.html)
+* [Terraform backend](https://developer.hashicorp.com/terraform/language/settings/backends/s3)
+
+## Contributing
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
 ## License
