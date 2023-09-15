@@ -13,6 +13,8 @@ DPA Solution is basically build around 3 pillars - Entrypoints, Aggregators and 
  * [Deployment](#deployment)
  * [Benefits](#benefits)
  * [Limitations](#limitations)
+ * [Next-Steps(Backlog)](#backlog)
+ * [Access Management](#accessmanagement)
 
 ## Principles
 1. Deployments to environments must be consistent and use same artifacts for deployment
@@ -67,7 +69,8 @@ Stages contain actual building blocks that form the jobs inside stages. Each sta
 ## Limitations
 1. First release supports (provides reuasble code) only for AWS CodePipeline and Gitlab CI platforms.
 
-## Next steps (Backlog)
+## Backlog
+* Infrastructure templates for Github Actions and Jenkins
 * Java based application pipeline templates that deploys to container ecosystem like ECS and EKS
 * Frontend UI based application pipeline templates for deployment to AWS environments
 * Workflow templates for infrastructure based applications for Amazon CodeCatalyst
@@ -79,7 +82,6 @@ There are multiple aspects of accesses while working or using DPA templates:
 * Service account to be used for pipeline execution and deployment to cloud environments
 * Pipelines uses least privileges IAM roles to access AWS resources like ECR docker images, SNS and distribution list in pipeline job execution
 * Pipelines should be protected with limited access to avoid unwanted updates on pipeline configs and deletion
-
 
 ## Security
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
