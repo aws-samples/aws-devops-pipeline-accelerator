@@ -37,7 +37,7 @@ Aggregators in DPA is a collection of jobs managed by stages, there are multiple
 
 ### Stages
 Stages contain actual building blocks that form the jobs inside stages. Each stage represent specific execution of pipeline jobs.
-***Default Stages provisioned for a Single Environment (dev) are mentioned below***. You can customize the pre-defined stages in the Entrypoint configuration provided above. And this is explained in detail in the Deployment Section for individual types of Deployment below. (Please follow the links as per your requirements)
+***Default Stages provisioned for a Single Environment (dev) are mentioned below***. You can customize the pre-defined stages in the Entrypoint configuration provided above. And this is explained in detail in the Deployment Section for individual types of Deployment [below](#deployment)
 
 The pipeline stops/exits on encountering a failure at any of the below stages. Then the user has to fix these failures and re-run the Pipeline to proceed.
 
@@ -82,7 +82,7 @@ The pipeline stops/exits on encountering a failure at any of the below stages. T
 ## Access Management
 There are multiple aspects of accesses while working or using DPA templates:
 1. Role based access to be configured for pipeline visibility and execution of workflows irrespective of platform
-2. Service account to be used for pipeline execution and deployment to cloud environments
+2. Service account to be used for pipeline execution and deployment to cloud environments. [Example Policy](https://docs.aws.amazon.com/codepipeline/latest/userguide/security-iam-id-policies-examples.html)
 3. Pipelines uses least privileges IAM roles to access AWS resources like ECR docker images, SNS and distribution list in pipeline job execution
 4. Pipelines should be protected with limited access to avoid unwanted updates on pipeline configs and deletion
 5. Gitlab to AWS Integration is via the Environment variables configured and explained [here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md#usage)
