@@ -31,5 +31,5 @@ Note: Please update the docker image tag and ECR repo url according to the direc
 ## Notes
 1. As these Docker Images will be uploaded in the End-users AWS ECR repo, patching and making sure they are up-to-date is your responsibility.
 2. This solution has a variable to read the Docker Image name, so you can use your own Docker image as well.
-3. [Docker best practices followed](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-4. 
+3. Docker best practices [listed here followed](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+   
