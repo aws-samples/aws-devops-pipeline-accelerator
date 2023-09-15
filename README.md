@@ -74,10 +74,9 @@ The pipeline stops/exits on fqailure at any of the stages, and the user has to f
 1. First release supports (provides reuasble code) only for AWS CodePipeline and Gitlab CI platforms.
 
 ## Backlog
-* Infrastructure templates for Github Actions and Jenkins
+* Workflow templates for Infrastructure based applications for Amazon CodeCatalyst, Github Actions and Jenkins
 * Java based application pipeline templates that deploys to container ecosystem like ECS and EKS
 * Frontend UI based application pipeline templates for deployment to AWS environments
-* Workflow templates for infrastructure based applications for Amazon CodeCatalyst
 * Enable Multi-Account and Cross-Region provsioning and deployment 
 
 ## Access Management
@@ -86,6 +85,7 @@ There are multiple aspects of accesses while working or using DPA templates:
 * Service account to be used for pipeline execution and deployment to cloud environments
 * Pipelines uses least privileges IAM roles to access AWS resources like ECR docker images, SNS and distribution list in pipeline job execution
 * Pipelines should be protected with limited access to avoid unwanted updates on pipeline configs and deletion
+* Gitlab to AWS Integration is via the Environment variables configured and explained [here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md#usage)
 
 ## Examples
 There is an Examples folder included in this solution to showcase how to integrate/use the DPA solution in your repositories. 
