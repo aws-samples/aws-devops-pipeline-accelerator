@@ -38,6 +38,9 @@ Aggregators in DPA is a collection of jobs managed by stages, there are multiple
 ### Stages
 Stages contain actual building blocks that form the jobs inside stages. Each stage represent specific execution of pipeline jobs.
 ***Default Stages provisioned for a Single Environment (dev) are mentioned below***. You can customize the pre-defined stages in the Entrypoint configuration provided above. And this is explained in detail in the Deployment Section for individual types of Deployment below. (Please follow the links as per your requirements)
+
+The pipeline stops/exits on fqailure at any of the stages, and the user has to fix these and re-run the pipeline to proceed.
+
 1. Init
 2. Build
 3. Test
