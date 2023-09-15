@@ -80,7 +80,7 @@ In order to use DPA GitLab standardised pipelines for IaC templates below steps 
      DEV_DEPLOY: "true" # true / false to enable deployment to DEV environment
      DEV_ENV: "dev" # Dev environment name
      INT_AWS_ACCOUNT: 123456789012 # Integration environment AWS account number
-     INT_ARN_ROLE: arn:aws:iam::448599500132:role/dpa-gitlab-access-role # Role ARN that will be used to provision resources in Integration 
+     INT_ARN_ROLE: arn:aws:iam::123456789012:role/dpa-gitlab-access-role # Role ARN that will be used to provision resources in Integration 
      INT_DEPLOY: "true" # true / false to enable deployment to DEV environment
      INT_ENV: "int" # Dev environment name
    ```
