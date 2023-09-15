@@ -1,0 +1,38 @@
+version: "0.2"
+env:
+  git-credential-helper: "yes"
+  shell: bash
+  
+phases:
+  install:
+    commands:
+      - yum install jq -y
+  pre_build:
+    commands:
+      - PIPELINE_CONFIG_JSON=$CODEBUILD_SRC_DIR_SourceOutput1/entrypoint/terraform-infrastructure.json
+      - bucket=$( cat $PIPELINE_CONFIG_JSON | jq -r '.bucket')
+      - dynamodb_table=$( cat $PIPELINE_CONFIG_JSON | jq -r '.dynamodb_table')
+      - key=$( cat $PIPELINE_CONFIG_JSON | jq -r '.key')
+      - region=$( cat $PIPELINE_CONFIG_JSON | jq -r '.region')
+      
+  build:
+    commands:
+      - echo "Check The envType"
+      - echo "${CODEBUILD_SRC_DIR}" #Base repo, IAC code
+      - echo "${CODEBUILD_SRC_DIR_SourceOutput1}" #DBM repo, DBM code
+      - "cd ${CODEBUILD_SRC_DIR_SourceOutput1}"
+      - ls -lrt
+      - |
+        stage_required=$( jq -r '.predeploy_stage_required' entrypoint/terraform-infrastructure.json )
+        if [ $stage_required == "false" ]; then
+          echo "skipping Pre-Deploy stage....."
+          exit 0
+        else
+          terraform init -lock=false \
+            -backend-config="bucket=$bucket" \
+            -backend-config="dynamodb_table=$dynamodb_table" \
+            -backend-config="key=$key" \
+            -backend-config="region=$region" \
+            -backend-config="encrypt=false"
+          terraform plan -lock=false -out=tfplan
+        fi

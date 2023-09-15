@@ -1,0 +1,25 @@
+---
+variables:
+  AWS_REGION: us-east-1
+  DEV_AWS_ACCOUNT: ************
+  DEV_ARN_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
+  DEV_DEPLOY: "false"
+  DEV_ENV: "dev"
+  INT_AWS_ACCOUNT: ************
+  INT_ARN_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
+  INT_DEPLOY: "true"
+  INT_ENV: "dev"
+  AWS_CREDS_TARGET_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
+  TERRAFORM_TEST_CHECKOV: "false"
+  TERRAFORM_TEST_TERRASCAN: "true"
+
+include:
+  # - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
+  #   ref: $DPA_BRANCH
+  #   file: gitlab-ci/entrypoints/terraform-infrastructure.yml
+  #   rules:
+  #     - if: '$SOURCE_PROJECT == "pipelines_focus_grp/aws-devops-pipeline-accelerator" && $CI_PIPELINE_SOURCE == "pipeline" && $TEST_PIPELINE == "true"'
+  
+  - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
+    ref: cdk
+    file: gitlab-ci/entrypoints/cdk-infrastructure.yml

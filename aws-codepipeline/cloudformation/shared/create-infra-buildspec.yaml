@@ -1,0 +1,52 @@
+version: "0.2"
+env:
+  git-credential-helper: "yes"
+  shell: bash
+  
+phases:
+#   install:
+#     commands:
+#       - yum install jq -y
+  pre_build:
+    commands:
+      - PIPELINE_CONFIG_JSON=$CODEBUILD_SRC_DIR_SourceOutput1/entrypoint/config.json
+      - CFN_DEPLOY_ACCOUNT=$( cat $PIPELINE_CONFIG_JSON | jq -r '.account')
+      - TARGET_ROLENAME=$( cat $PIPELINE_CONFIG_JSON | jq -r '.roleName')
+      - CFN_DEPLOY_REGION=$( cat $PIPELINE_CONFIG_JSON | jq -r '.region')
+      - export CFN_DEPLOY_ACCOUNT=$CFN_DEPLOY_ACCOUNT
+      - export TARGET_ROLENAME=$TARGET_ROLENAME
+      - echo $CFN_DEPLOY_ACCOUNT
+      - echo $TARGET_ROLENAME
+      - ASSUME_ROLE_ARN=arn:aws:iam::$CFN_DEPLOY_ACCOUNT:role/$TARGET_ROLENAME
+      - echo $ASSUME_ROLE_ARN
+      - CREDS=$(aws sts assume-role --role-arn $ASSUME_ROLE_ARN --role-session-name $(date '+%Y%m%d%H%M%S%3N') --duration-seconds 3600 --query '[Credentials.AccessKeyId,Credentials.SecretAccessKey,Credentials.SessionToken]' --output text)
+      - export PROFILE=target
+      - aws configure --profile $PROFILE set region "$CFN_DEPLOY_REGION"
+      - aws configure --profile $PROFILE set output "json"
+      - aws configure --profile $PROFILE set aws_secret_access_key "$(echo $CREDS | cut -d' ' -f2)"
+      - aws configure --profile $PROFILE set aws_access_key_id "$(echo $CREDS | cut -d' ' -f1)"
+      - aws configure --profile $PROFILE set aws_session_token "$(echo $CREDS | cut -d' ' -f3)"      
+      
+
+  build:
+    commands:
+      - echo "Check The envType"
+      - echo "${CODEBUILD_SRC_DIR}" #Base repo, IAC code
+      - echo "${CODEBUILD_SRC_DIR_SourceOutput1}" #DBM repo, DBM code
+      - "cd ${CODEBUILD_SRC_DIR_SourceOutput1}"
+      - ls -l
+      - |
+        ENV_TYPE=$( jq -r '.envType' entrypoint/config.json )
+        createinfra_stage_required=$( jq -r '.createinfra_stage_required' entrypoint/config.json )
+        cft_s3_bucket=$( jq -r '.cft_s3_bucket' entrypoint/config.json )
+        stack_name=$( jq -r '.stack_name' entrypoint/config.json )
+        if [ $createinfra_stage_required == "false" ]; then
+            echo "skipping the stage"
+            exit 0
+        else
+            aws cloudformation package --template-file main.yaml --output-template packaged.yaml --s3-bucket $cft_s3_bucket --profile target
+            aws cloudformation deploy --template-file packaged.yaml --parameter-overrides $(cat dev.properties | tr "\n" " ") --capabilities CAPABILITY_IAM --stack-name $stack_name --profile target
+        fi    
+  post_build:
+    commands:
+      - echo "Display Last Changes"

@@ -1,0 +1,14 @@
+---
+
+'Terraform format':
+  stage: Build
+  image: $AWS_ECR_REGISTRY/dpa-terraform:al2
+  script:
+    - terraform -version
+    - terraform-format.sh
+
+'Terraform validate':
+  stage: Build
+  image: $AWS_ECR_REGISTRY/dpa-terraform:al2
+  script:
+    - terraform-validate.sh

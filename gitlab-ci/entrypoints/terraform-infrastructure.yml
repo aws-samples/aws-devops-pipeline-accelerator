@@ -1,0 +1,22 @@
+---
+variables:
+  APP_PROJECT: $CI_PROJECT_NAME
+  APP_TF_ROOT: terraform
+  APP_TF_ROOT_DIR: terraform # this can be overriden by application as define where terraform scripts located
+  AWS_REGION: us-east-1
+  DEV_DEPLOY: "false" # false, true, enable/disable DEV env deployment
+  DEV_ENV: "dev"
+  INT_DEPLOY: "false" # false, true, enable/disable INT env deployment
+  INTEGRATION_ENV: "int"
+  VARIABLES_FOLDER: variables # Local to APP_TF_ROOT
+  TERRAFORM_TEST_CHECKOV: "true" # true enabled checkov tests in pipeline
+  TERRAFORM_TEST_TFSEC: "true" # true enabled tfsec tests in pipeline
+  TERRAFORM_TEST_TERRASCAN: "true" # true enabled terrascan tests in pipeline
+  TERRAFORM_TEST_KICS: "true" # true enabled kics tests in pipeline
+
+include:
+  - local: gitlab-ci/common/utilities.yml
+  - local: gitlab-ci/stages/build/terraform/terraform-build.yml
+  - local: gitlab-ci/aggregators/terraform/test-terraform.yml
+  - local: gitlab-ci/aggregators/terraform/terraform-infrastructure.yml
+  - local: gitlab-ci/aggregators/terraform/deploy-terraform.yml

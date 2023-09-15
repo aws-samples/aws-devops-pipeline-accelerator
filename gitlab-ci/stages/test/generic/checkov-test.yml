@@ -1,0 +1,24 @@
+---
+.checkov-test:
+  image:
+    name: bridgecrew/checkov:latest
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      exists:
+        - '**/*.yml'
+        - '**/*.yaml'
+        - '**/*.json'
+        - '**/*.template'
+        - '**/*.tf'      
+        - '**/serverless.yml'
+        - '**/serverless.yaml'
+  script:
+    - checkov -d ${IAC_ROOT_PATH} -o junitxml | tee checkov.test.xml
+  artifacts:
+    reports:
+      junit: checkov.test.xml
+    paths:
+      - checkov.test.xml

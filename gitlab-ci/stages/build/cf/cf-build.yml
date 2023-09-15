@@ -1,0 +1,9 @@
+--- 
+'Validate CloudFormation templates':
+  image: ${DPA_CLOUDFORMATION_DOCKER_IMAGE}
+  stage: Build
+  script:
+    - validate-template.sh
+  variables:
+    CF_TEMPLATE_DIR: ${TEMPLATES_ROOT_DIR}
+  

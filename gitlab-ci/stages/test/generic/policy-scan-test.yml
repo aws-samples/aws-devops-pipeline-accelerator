@@ -1,0 +1,14 @@
+---
+
+include:
+  - template: Security/License-Scanning.gitlab-ci.yml
+
+license_scanning:
+  stage: test
+  rules:
+    - when: never
+
+.license-scanning-test:
+  extends: license_scanning
+  needs: []
+  dependencies: []

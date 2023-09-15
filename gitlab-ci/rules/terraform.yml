@@ -1,0 +1,47 @@
+---
+
+.test-checkov-terraform:
+  branch-without-mr: ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null) && ($TERRAFORM_TEST_CHECKOV == "true")
+  main: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && ($TERRAFORM_TEST_CHECKOV == "true")
+  mr: ($CI_PIPELINE_SOURCE == "merge_request_event") && ($TERRAFORM_TEST_CHECKOV == "true")
+  tag: ($CI_COMMIT_TAG != null) && ($TERRAFORM_TEST_CHECKOV == "true")
+  # test-pipeline: ($CI_PROJECT_PATH == "" || $CI_PROJECT_PATH =~ "") && ($SOURCE_PROJECT == "") && ($TEST_PIPELINE == "true") && ($TERRAFORM_TEST_CHECKOV == "true")
+
+.test-tfsec-terraform:
+  branch-without-mr: ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null) && ($TERRAFORM_TEST_TFSEC == "true")
+  main: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && ($TERRAFORM_TEST_TFSEC == "true")
+  mr: ($CI_PIPELINE_SOURCE == "merge_request_event") && ($TERRAFORM_TEST_TFSEC == "true")
+  tag: ($CI_COMMIT_TAG != null) && ($TERRAFORM_TEST_TFSEC == "true")
+
+.test-terrascan-terraform:
+  branch-without-mr: ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null) && ($TERRAFORM_TEST_TERRASCAN == "true")
+  main: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && ($TERRAFORM_TEST_TERRASCAN == "true")
+  mr: ($CI_PIPELINE_SOURCE == "merge_request_event") && ($TERRAFORM_TEST_TERRASCAN == "true")
+  tag: ($CI_COMMIT_TAG != null) && ($TERRAFORM_TEST_TERRASCAN == "true")
+
+.test-kics-terraform:
+  branch-without-mr: ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null) && ($TERRAFORM_TEST_KICS == "true")
+  main: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && ($TERRAFORM_TEST_KICS == "true")
+  mr: ($CI_PIPELINE_SOURCE == "merge_request_event") && ($TERRAFORM_TEST_KICS == "true")
+  tag: ($CI_COMMIT_TAG != null) && ($TERRAFORM_TEST_KICS == "true")
+
+.deploy-terraform:
+  branch-without-mr: ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null) && ($DEV_DEPLOY == "true" || $INT_DEPLOY == "true" || $PREPROD_DEPLOY == "true")
+  main: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && ($DEV_DEPLOY == "true" || $INT_DEPLOY == "true" || $PREPROD_DEPLOY == "true")
+  mr: ($CI_PIPELINE_SOURCE == "merge_request_event") && ($DEV_DEPLOY == "true" || $INT_DEPLOY == "true" || $PREPROD_DEPLOY == "true")
+  tag: ($CI_COMMIT_TAG != null) && ($DEV_DEPLOY == "true" || $INT_DEPLOY == "true" || $PREPROD_DEPLOY == "true")
+
+.dev-terraform-deploy:
+  branch-without-mr: ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null) && ($DEV_DEPLOY == "true")
+  main: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && ($DEV_DEPLOY == "true")
+  mr: ($CI_PIPELINE_SOURCE == "merge_request_event") && ($DEV_DEPLOY == "true")
+  tag: ($CI_COMMIT_TAG != null) && ($DEV_DEPLOY == "true")
+
+.int-terraform-deploy:
+  branch-without-mr: ($CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_OPEN_MERGE_REQUESTS == null) && ($INT_DEPLOY == "true")
+  main: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && ($INT_DEPLOY == "true")
+  mr: ($CI_PIPELINE_SOURCE == "merge_request_event") && ($INT_DEPLOY == "true")
+  tag: ($CI_COMMIT_TAG != null) && ($INT_DEPLOY == "true")
+
+# .deploy-terraform-release:
+#   manual: ($CI_PIPELINE_SOURCE == "web") && ($RELEASE_PIPELINE == "true") && ($PREPROD_DEPLOY == "true" || $PROD_DEPLOY == "true")

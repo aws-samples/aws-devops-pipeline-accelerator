@@ -1,0 +1,88 @@
+---
+include:
+  - local: gitlab-ci/stages/test/terraform/iac-kics-sast.yml
+  - local: gitlab-ci/stages/test/generic/checkov-test.yml
+  - local: gitlab-ci/stages/test/terraform/tfsec-test.yml
+  - local: gitlab-ci/stages/test/terraform/terrascan-test.yml
+  - local: gitlab-ci/stages/test/generic/secret-detection-test.yml
+  - local: gitlab-ci/stages/test/generic/policy-scan-test.yml
+ 
+
+'KICS Sast':
+  stage: Test
+  extends: .iac-kics-sast
+  when: always
+  rules:
+    - if: !reference [ .generic, branch-with-mr ]
+      when: never
+    - if: !reference [.test-kics-terraform, tag]
+      when: never
+    - if: !reference [.test-kics-terraform, mr]
+      when: on_success
+    - if: !reference [.test-kics-terraform, branch-without-mr]
+      when: on_success
+    - if: !reference [.test-kics-terraform, main]
+      when: on_success
+
+'Checkov':
+  stage: Test
+  extends: .checkov-test
+  variables:
+    IAC_ROOT_PATH: ${APP_TF_ROOT_DIR}
+  rules:
+    - if: !reference [ .generic, branch-with-mr ]
+      when: never
+    - if: !reference [.test-checkov-terraform, tag]
+      when: never
+    - if: !reference [.test-checkov-terraform, mr]
+      when: on_success
+    - if: !reference [.test-checkov-terraform, branch-without-mr]
+      when: on_success
+    - if: !reference [.test-checkov-terraform, main]
+      when: on_success
+
+'TFSec':
+  stage: Test
+  extends: .tfsec-test
+  rules:
+    - if: !reference [ .generic, branch-with-mr ]
+      when: never
+    - if: !reference [.test-tfsec-terraform, tag]
+      when: never
+    - if: !reference [.test-tfsec-terraform, mr]
+      when: on_success
+    - if: !reference [.test-tfsec-terraform, branch-without-mr]
+      when: on_success
+    - if: !reference [.test-tfsec-terraform, main]
+      when: on_success
+
+# 'Terrascan tests':
+#   stage: Test
+#   extends: .terrascan-test
+#   script:
+#     - echo "Terrascan tests"
+#   rules:
+#     - if: !reference [ .generic, branch-with-mr ]
+#       when: never
+#     - if: !reference [.test-terrascan-terraform, tag]
+#       when: never
+#     - if: !reference [.test-terrascan-terraform, mr]
+#       when: on_success
+#     - if: !reference [.test-terrascan-terraform, branch-without-mr]
+#       when: on_success
+#     - if: !reference [.test-terrascan-terraform, main]
+#       when: on_success
+
+'Secret Detection':
+  extends: .secret-detection-test
+  stage: Verify
+  artifacts:
+    paths:
+      - gl-secret-detection-report.json
+
+'License Scanning':
+  extends: .license-scanning-test
+  stage: Verify
+  artifacts:
+    paths:
+      - gl-license-scanning-report.json

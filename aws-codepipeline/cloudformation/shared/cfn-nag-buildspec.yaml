@@ -1,0 +1,54 @@
+version: "0.2"
+env:
+  git-credential-helper: "yes"
+  shell: bash
+  
+phases:
+#   install:
+#     commands:
+#       - yum install jq -y
+  pre_build:
+    commands:
+      - echo `ls`
+
+  build:
+    commands:
+      - echo "Check The envType"
+      - echo "${CODEBUILD_SRC_DIR}" #Base repo, IAC code
+      - echo "${CODEBUILD_SRC_DIR_SourceOutput1}" #DBM repo, DBM code
+      - "cd ${CODEBUILD_SRC_DIR_SourceOutput1}"
+      - ls -l
+      - |
+        ENV_TYPE=$( jq -r '.envType' entrypoint/config.json )
+        test_stage_required=$( jq -r '.test_stage_required' entrypoint/config.json )
+        cft_s3_bucket=$( jq -r '.cft_s3_bucket' entrypoint/config.json )
+        stack_name=$( jq -r '.stack_name' entrypoint/config.json )
+        current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+        if [ $test_stage_required == "false" ]; then
+            echo "skipping the stage"
+            exit 0
+        else
+            if [ $ENV_TYPE == "terraform" ]; then 
+                echo "terraform"
+            elif [ $ENV_TYPE == "cloudformation" ]; then
+                echo "cloudformation"
+                cfn_nag nested/* -t json > cfnoutput_$current_time.json
+                for i in $(jq -r '.[] | .file_results.failure_count' cfnoutput_$current_time.json); do 
+                  aws s3 cp cfnoutput_$current_time.json s3://$cft_s3_bucket/cfn_nag_output/
+                  if [ $i -gt 0 ]; 
+                  then
+                    echo "Template has CFN_NAG failures"
+                    exit 1
+                  else
+                    echo "Template has no failures"
+                done
+            elif [ $ENV_TYPE == "cdk" ]; then
+                echo "cdk"
+            else 
+              exit 1
+              echo "check the envType variable input in the config.json file"
+            fi 
+        fi
+  post_build:
+    commands:
+      - echo "Display Last Changes"

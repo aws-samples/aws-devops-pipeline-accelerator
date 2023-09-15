@@ -1,0 +1,16 @@
+---
+variables:
+  APP_PROJECT: $CI_PROJECT_NAME
+  APP_CDK_ROOT: examples/gitlab_ci/cdk
+  AWS_REGION: us-east-1
+  DEV_DEPLOY: "false" # false, true, enable/disable DEV env deployment
+  INTEGRATION_DEPLOY: "false" # false, automated, manual, delete, plan
+  VARIABLES_FOLDER: variables # Local to APP_CDK_ROOT
+  CDK_DIR: "examples/gitlab_ci/cdk/infra-cdk-app"
+include:
+  - local: gitlab-ci/common/utilities.yml
+  - local: gitlab-ci/stages/build/cdk/cdk-build.yml
+  - local: gitlab-ci/aggregators/cdk/test-cdk.yml
+  - local: gitlab-ci/aggregators/cdk/cdk-infrastructure.yml
+  - local: gitlab-ci/aggregators/cdk/deploy-cdk.yml
+  - local: gitlab-ci/stages/destroy/cdk-destroy.yml

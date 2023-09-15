@@ -1,0 +1,54 @@
+default:
+  image: ${DPA_TERRAFORM_DOCKER_IMAGE}
+
+.terraform:
+  variables:
+    TF_DIR: ${TERRAFORM_DEPLOYMENT_DIR}/${APP_TF_ROOT_DIR}
+  id_tokens:
+    AWS_WEB_ITENTITY_TOKEN:
+      aud: https://gitlab.aws.dev
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-${ENVIRONMENT}-${JOB}
+    paths:
+      - "${TF_DIR}/.terraform/"
+      - "${TF_DIR}/.terraform.lock.hcl"
+
+.terraform-plan:
+  extends: .terraform
+  script:
+    - terraform-plan.sh
+  environment:
+    name: ${ENVIRONMENT}/${PROJECT}/${JOB}
+    action: prepare
+  artifacts:
+    paths:
+      - ${TF_DIR}/terraform-plan.cache
+
+.terraform-apply:
+  extends: .terraform
+  script:
+    - terraform-apply.sh
+  environment:
+    name: ${ENVIRONMENT}/${PROJECT}/${JOB}
+    action: start
+
+.terraform-destroy:
+  extends: .terraform
+  script:
+    - terraform-destroy.sh
+
+
+'Download deployment artifact':
+  stage: Deployment Preperation
+  image: ${GITLAB_UTILITIES_DOCKER_IMAGE}
+  variables:
+    ARTIFACT_PACKAGE_URL: ${PACKAGE_REGISTRY_ARTIFACT_BASE_URL}/${COMPONENT_NAME}/${VERSION}/${COMPONENT_NAME}.zip
+    OUTPUT_FILE_NAME: ${COMPONENT_NAME}.zip
+    ZIP_FILE_NAME: ${COMPONENT_NAME}.zip
+    OUTPUT_DIR: ${TERRAFORM_DEPLOYMENT_DIR}
+  script:
+    - download-package.sh
+    - unarchive-package.sh
+  artifacts:
+    paths:
+      - ${TERRAFORM_DEPLOYMENT_DIR}

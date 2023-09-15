@@ -1,0 +1,66 @@
+--- 
+
+include:
+  - local: gitlab-ci/stages/deploy/terraform/terraform-deployer.yml
+
+
+'DEV Terraform Plan':
+  stage: DEV Pre-Deploy
+  resource_group: dev
+  extends: .terraform-plan
+  variables:
+    AWS_ACCOUNT: $DEV_AWS_ACCOUNT
+    ENVIRONMENT: $DEV_ENV
+    JOB: $APP_JOB
+    PROJECT: $APP_PROJECT
+    ROLE_ARN: $DEV_ARN_ROLE
+    TF_ROOT: $APP_TF_ROOT
+    TEST_PIPELINE: $TEST_PIPELINE
+  dependencies:
+    - 'Download deployment artifact'
+  needs:
+    - 'Download deployment artifact'
+
+'DEV Terraform apply':
+  stage: DEV Deploy
+  resource_group: dev
+  extends: .terraform-apply
+  variables:
+    AWS_ACCOUNT: $DEV_AWS_ACCOUNT
+    ENVIRONMENT: $DEV_ENV
+    JOB: $APP_JOB
+    PROJECT: $APP_PROJECT
+    ROLE_ARN: $DEV_ARN_ROLE
+    TF_ROOT: $APP_TF_ROOT
+    TEST_PIPELINE: $TEST_PIPELINE
+  dependencies:
+    - 'DEV Terraform Plan'
+    - 'Download deployment artifact'
+
+# 'DEV App Destroy':
+#   stage: DEV Destroy
+#   extends: .terraform-destroy
+#   resource_group: dev
+#   environment:
+#     name: ${DEV_ENV}/${APP_PROJECT}/${APP_JOB}
+#     action: stop
+#   variables:
+#     AWS_ACCOUNT: $DEV_AWS_ACCOUNT
+#     ENVIRONMENT: $DEV_ENV
+#     JOB: $APP_JOB
+#     PROJECT: $APP_PROJECT
+#     ROLE_ARN: $DEV_ARN_ROLE
+#     TF_ROOT: $APP_TF_ROOT
+#   dependencies:
+#     - 'Download terraform artifact'
+#   rules:
+#     - if: !reference [ .generic, branch-with-mr ]
+#       when: never
+#     - if: !reference [.dev-terraform-deploy, tag]
+#       when: never
+#     - if: !reference [.dev-terraform-deploy, mr]
+#       when: on_success
+#     - if: !reference [.dev-terraform-deploy, branch-without-mr]
+#       when: on_success
+#     - if: !reference [.dev-terraform-deploy, main]
+#       when: on_success

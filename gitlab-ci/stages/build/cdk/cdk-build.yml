@@ -1,0 +1,23 @@
+---
+
+'CDK Build (synth)':
+  stage: Build
+  image: $AWS_ECR_REGISTRY/cdk:latest
+  script:
+    - cdk-build.sh
+    # - echo "for artifact ${CDK_DIR}"
+  artifacts:
+    paths:
+      - ${CDK_DIR}
+
+'CDK Version Validate':
+  stage: Build
+  image: $AWS_ECR_REGISTRY/cdk:latest
+  script:
+    - cdk-validate.sh
+
+# 'Node validate':
+#   stage: Build
+#   image: $AWS_ECR_REGISTRY/cdk:latest
+#   script:
+#     - node-validate.sh

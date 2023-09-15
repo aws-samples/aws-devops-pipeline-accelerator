@@ -1,0 +1,34 @@
+---
+
+'Terraform Entrypoint Test app':
+  trigger:
+    include:
+      - examples/gitlab_ci/terraform/infra-terraform-app/.gitlab-ci.yml
+    strategy: depend
+  variables:
+    SOURCE_PROJECT: $CI_PROJECT_PATH
+    TEST_PIPELINE: "true"
+    DPA_BRANCH: $CI_COMMIT_BRANCH
+    DEV_DEPLOY: "true"
+
+'CloudFormation Entrypoint Test app':
+  trigger:
+    include: 
+      - examples/gitlab_ci/cloudformation/infra-cloudformation-app/.gitlab-ci.yml
+    strategy: depend
+  variables:
+    SOURCE_PROJECT: $CI_PROJECT_PATH
+    TEST_PIPELINE: "true"
+    DPA_BRANCH: $CI_COMMIT_BRANCH
+    DEV_DEPLOY: "true"
+
+'CDK Entrypoint Test app':
+  trigger:
+    include:
+      - examples/gitlab_ci/cdk/infra-cdk-app/.gitlab-ci.yml
+    strategy: depend
+  variables:
+    SOURCE_PROJECT: $CI_PROJECT_PATH
+    TEST_PIPELINE: "true"
+    DPA_BRANCH: $CI_COMMIT_BRANCH
+    DEV_DEPLOY: "true"

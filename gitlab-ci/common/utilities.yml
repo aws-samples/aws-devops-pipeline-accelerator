@@ -1,0 +1,26 @@
+---
+include:
+  - local: gitlab-ci/common/stages.yml
+  - local: gitlab-ci/rules/rules.yml
+
+variables:
+   # component name, repository project name, required to publish the artifact
+  COMPONENT_NAME: $CI_PROJECT_NAME
+  # component version
+  VERSION: 0.${CI_PIPELINE_IID}.0_${CI_COMMIT_SHORT_SHA}
+  # folder name for artifacts
+  BUILD_ARTIFACTS_PATH: dist
+  # base URL for package registry
+  PACKAGE_REGISTRY_ARTIFACT_BASE_URL: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic
+  # image name with version for utilities docker image
+  GITLAB_UTILITIES_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/dpa-utilities:latest
+  # image with Terraform setup
+  DPA_TERRAFORM_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/dpa-terraform:latest
+  # image with CLoudformation setup
+  DPA_CLOUDFORMATION_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/dpa-cloudformation:latest
+  # directory to store extracted terraform artifact files
+  TERRAFORM_DEPLOYMENT_DIR: terraform-source-dir
+# image with cdk setup
+  DPA_CDK_DOCKER_IMAGE: 316172404479.dkr.ecr.us-east-1.amazonaws.com/cdk:latest
+  # directory to store extracted cdk artifact files
+  CDK_DEPLOYMENT_DIR: cdk-source-dir

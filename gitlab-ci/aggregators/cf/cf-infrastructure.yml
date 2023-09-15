@@ -1,0 +1,50 @@
+---
+include:
+  - local: gitlab-ci/stages/init/aws-configure.yml
+  - local: gitlab-ci/stages/build/cf/cf-build.yml
+  - local: gitlab-ci/aggregators/cf/cf-test.yml
+  - local: gitlab-ci/stages/test/generic/checkov-test.yml
+  - local: gitlab-ci/stages/publish/publish-package.yml
+  
+'Configure AWS Access':
+  stage: .pre
+  extends: .generate-ecr-access-token
+
+'Package and publish CloudFormation artifact':
+  stage: Publish
+  extends: .archive_and_publish
+  variables:
+    ARTIFACT_NAME: ${COMPONENT_NAME}
+    PATH_TO_ZIP: ${TEMPLATES_ROOT_DIR}
+
+'Publish evidence for CFN_LINT':
+  stage: Publish
+  script:
+    - echo "Publish evidence for CFN_LINT"
+
+'Publish evidence for CFN_NAG':
+  stage: Publish
+  script:
+    - echo "Publish evidence for CFN_NAG"
+
+'Download deployment artifact':
+  stage: Deployment Preperation
+  image: ${GITLAB_UTILITIES_DOCKER_IMAGE}
+  script:
+    - echo "Download deployment artifact"
+
+'DEV cloudFormation deploy':
+  stage: DEV Deploy
+  resource_group: dev
+  dependencies:
+    - 'Download deployment artifact'
+  script:
+    - echo "DEV cloudFormation deploy"
+
+'DEV cloudFormation destroy':
+  stage: DEV Destroy
+  resource_group: dev
+  dependencies:
+    - 'Download deployment artifact'
+  script:
+    - echo "DEV cloudFormation destroy"

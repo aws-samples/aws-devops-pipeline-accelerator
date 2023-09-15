@@ -1,0 +1,6 @@
+---
+
+include:
+  - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
+    ref: feature/gitlab-pipeline-structure
+    file: gitlab-ci/entrypoints/cf-infrastructure.yml

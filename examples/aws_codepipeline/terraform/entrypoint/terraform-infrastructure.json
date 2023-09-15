@@ -1,0 +1,12 @@
+{
+    "build_stage_required" : "true",
+    "test_stage_required" : "true",
+    "predeploy_stage_required": "true",
+    "deploy_stage_required": "true",
+    "postdeploy_stage_required": "true",
+    "destroy_stage_required": "true",
+    "bucket":"tf-state-dpa",
+    "key":"terraform_test.tfstate",
+    "region":"us-east-1",
+    "dynamodb_table":"tf-state-dpa"
+}

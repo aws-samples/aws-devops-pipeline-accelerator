@@ -1,0 +1,14 @@
+
+---
+.npm-test:
+  image:
+    name: $AWS_ECR_REGISTRY/cdk:latest
+  script:
+    - npm-test.sh
+    - ls
+  artifacts:
+    reports:
+      junit: "cdk/coverage/clover.xml"
+    paths:
+      - "cdk/coverage/clover.xml"
+      - shared/cdk

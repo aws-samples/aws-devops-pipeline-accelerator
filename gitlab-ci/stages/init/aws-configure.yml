@@ -1,0 +1,16 @@
+---
+.generate-ecr-access-token:
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
+  before_script:
+    - aws --version
+  script:
+    - USER=AWS
+    - ECR_ACCESS_TOKEN=$(aws ecr get-login-password --region $AWS_DEFAULT_REGION)
+    - AUTH=$(echo "$USER:$ECR_ACCESS_TOKEN" | base64 | tr -d "\n")
+    - echo $AUTH
+    - |
+      curl --request PUT --header "PRIVATE-TOKEN: $GITLAB_ACCESS_TOKEN" \
+      --silent --output /dev/null --show-error --fail \
+      "https://gitlab.aws.dev/api/v4/projects/$CI_PROJECT_ID/variables/AWS_ECR_AUTH" --form "value=$AUTH"

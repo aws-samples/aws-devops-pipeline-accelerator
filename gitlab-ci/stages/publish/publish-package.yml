@@ -1,0 +1,19 @@
+--- 
+
+.archive_and_publish:
+  image: ${GITLAB_UTILITIES_DOCKER_IMAGE}
+  variables:
+    # output file name for zip command
+    ZIP_OUTPUT_FILE_NAME: ${ARTIFACT_NAME}
+    # the file to zip, set at least one of FILE_TO_ZIP, PATH_TO_ZIP
+    FILE_TO_ZIP:
+    # the path to zip, set at least one of FILE_TO_ZIP, PATH_TO_ZIP
+    PATH_TO_ZIP:
+    # overriden UPLOAD_FILE
+    UPLOAD_FILE: ${BUILD_ARTIFACTS_PATH}/${ARTIFACT_NAME}.zip
+    # package url combined from defined params
+    ARTIFACT_PACKAGE_URL: ${PACKAGE_REGISTRY_ARTIFACT_BASE_URL}/${ARTIFACT_NAME}/${VERSION}/${ARTIFACT_NAME}.zip
+  script:
+    # FILE_TO_ZIP or PATH_TO_ZIP must be provided
+    - create-archive.sh
+    - publish-package.sh

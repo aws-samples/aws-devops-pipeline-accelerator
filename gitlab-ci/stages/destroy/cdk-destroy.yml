@@ -1,0 +1,8 @@
+---
+
+'CDK Destroy':
+  when: manual
+  stage: DEV Destroy
+  image: $AWS_ECR_REGISTRY/cdk:latest
+  script:
+    - cdk-destroy.sh    

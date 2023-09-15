@@ -1,0 +1,19 @@
+---
+variables:
+  AWS_REGION: us-east-2
+  DEV_AWS_ACCOUNT: ************
+  DEV_ARN_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
+  DEV_DEPLOY: "false"
+  DEV_ENV: "dev"
+  INT_AWS_ACCOUNT: ************
+  INT_ARN_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
+  INT_DEPLOY: "true"
+  INT_ENV: "dev"
+  AWS_CREDS_TARGET_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
+  TERRAFORM_TEST_CHECKOV: "true"
+  TERRAFORM_TEST_TERRASCAN: "true"
+  APP_TF_ROOT_DIR: examples/gitlab_ci/terraform/infra-terraform-app/terraform
+include:
+  - project: pipelines_focus_grp/aws-devops-pipeline-accelerator
+    ref: feature/gitlab-pipeline-structure
+    file: gitlab-ci/entrypoints/terraform-infrastructure.yml

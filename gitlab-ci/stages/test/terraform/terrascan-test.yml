@@ -1,0 +1,17 @@
+---
+
+.terrascan-test:
+  image:
+    name: tenable/terrascan:1.15.2
+    entrypoint: ["/bin/sh", "-c"]
+  before_script:
+    - export TF_CLI_CONFIG_FILE="$TERRASCAN_CREDENTIALS_FILE"
+  script:
+    - /go/bin/terrascan scan . -t aws -i terraform --show-passed -o junit-xml > junit-terrascan
+  artifacts:
+    reports:
+      junit: junit-terrascan
+    paths:
+      - junit-terrascan
+  needs: []
+  dependencies: []

@@ -1,0 +1,40 @@
+default:
+  image: ${DPA_CDK_DOCKER_IMAGE}
+
+.cdk:
+  variables:
+    #CDK_DIR: ${CDK_DEPLOYMENT_DIR}/examples/gitlab_ci/cdk/infra-cdk-app
+    CDK_DIR: examples/gitlab_ci/cdk/infra-cdk-app
+  id_tokens:
+    AWS_WEB_ITENTITY_TOKEN:
+      aud: https://gitlab.aws.dev
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-${ENVIRONMENT}-${JOB}
+
+.cdk-plan:
+  extends: .cdk
+  script:
+    - cdk-plan.sh
+  environment:
+    name: ${ENVIRONMENT}/${PROJECT}/${JOB}
+    action: prepare
+  # artifacts:
+  #   paths:
+  #     - ${CDK_DIR}/cdk-plan.cache
+
+.cdk-deploy:
+  extends: .cdk
+  script:
+    - cdk-deploy.sh
+  environment:
+    name: ${ENVIRONMENT}/${PROJECT}/${JOB}
+    action: start
+  artifacts:
+    paths:
+      - ${CDK_DIR}
+
+.cdk-destroy:
+  extends: .cdk
+  script:
+    - cd ${CDK_DIR}
+    - cdk destroy --force

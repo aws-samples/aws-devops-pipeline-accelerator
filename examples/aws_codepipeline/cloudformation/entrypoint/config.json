@@ -1,0 +1,12 @@
+{
+    "init_stage_required" : "true",
+    "test_stage_required" : "true",
+    "createinfra_stage_required": "true",
+    "envType" : "cloudformation",
+    "cft_s3_bucket" : "pipeline-bucket",               
+    "stack_name" : "aws-cft-poc",                    
+    "account" : "************",                        
+    "roleName" : "codestack-poc-cross-account-role",  
+    "region" : "us-east-1",
+    "destroy_stack" : "false" 
+}

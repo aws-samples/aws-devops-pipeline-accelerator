@@ -1,0 +1,12 @@
+Parameters:
+  BucketName1:
+    Description: s3 bucket name
+    Type: String
+    Default: "pipeline-accelerator-1"
+
+Resources:
+  s3Bucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      AccessControl: Private
+      BucketName: !Sub "${BucketName1}"

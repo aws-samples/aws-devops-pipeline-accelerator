@@ -1,0 +1,37 @@
+--- 
+include:
+  - local: gitlab-ci/stages/deploy/terraform/terraform-deployer.yml
+
+
+'INT Terraform Plan':
+  stage: INT Pre-Deploy
+  resource_group: int
+  extends: .terraform-plan
+  variables:
+    AWS_ACCOUNT: $INT_AWS_ACCOUNT
+    ENVIRONMENT: $INT_ENV
+    JOB: $APP_JOB
+    PROJECT: $APP_PROJECT
+    ROLE_ARN: $INT_ARN_ROLE
+    TF_ROOT: $APP_TF_ROOT
+    TEST_PIPELINE: $TEST_PIPELINE
+  dependencies:
+    - 'Download deployment artifact'
+  needs:
+    - 'Download deployment artifact'
+
+'INT Terraform apply':
+  stage: INT Deploy
+  resource_group: int
+  extends: .terraform-apply
+  variables:
+    AWS_ACCOUNT: $INT_AWS_ACCOUNT
+    ENVIRONMENT: $INT_ENV
+    JOB: $APP_JOB
+    PROJECT: $APP_PROJECT
+    ROLE_ARN: $INT_ARN_ROLE
+    TF_ROOT: $APP_TF_ROOT
+    TEST_PIPELINE: $TEST_PIPELINE
+  dependencies:
+    - 'INT Terraform Plan'
+    - 'Download deployment artifact'
