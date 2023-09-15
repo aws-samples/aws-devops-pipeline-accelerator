@@ -29,8 +29,8 @@ Entrypoints in DPA represets specific IaC pipeline strating point that will be c
 This is the Configuration file which you need to add in your Application Repository and used for Customizing the various pre-defined stages.
 
 ***Example Entrypoint files :***
-1. https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/examples/aws_codepipeline/terraform/entrypoint/terraform-infrastructure.json
-2. https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/entrypoints/terraform-infrastructure.yml
+1. https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/examples/aws_codepipeline/terraform/entrypoint/terraform-infrastructure.json
+2. https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/gitlab-ci/entrypoints/terraform-infrastructure.yml
 
 ### Aggregators
 Aggregators in DPA is a collection of jobs managed by stages, there are multiple wrappers that forms entrypoint for specific IaC pipeline.
@@ -53,15 +53,15 @@ The pipeline stops/exits on encountering a failure at any of the below stages. T
 ## Prerequisites 
 
 1. An AWS Account with necessary permissions/roles that will be used to provision resources using IaC templates
-2. Docker Image created and pushed to ECR as [outlined here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/shared-docker/docker-images/README.md)
+2. Docker Image created and pushed to ECR as [outlined here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/shared-docker/docker-images/README.md)
 
 ## Architecture
 <img width="947" alt="image" src="https://github.com/aws-samples/aws-devops-pipeline-accelerator/assets/106240341/217c927d-3e1d-4f95-8cce-34560da9ea0d">
 
 ## Deployment
-1. [AWS CodePipeline for deploying Terraform resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/aws-codepipeline/terraform/README.md)
-2. [AWS CodePipeline for deploying CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/aws-codepipeline/terraform/README.md)
-3. [Gitlab CI for deploying Terraform, CDK and CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md)
+1. [AWS CodePipeline for deploying Terraform resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/aws-codepipeline/terraform/README.md)
+2. [AWS CodePipeline for deploying CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/aws-codepipeline/terraform/README.md)
+3. [Gitlab CI for deploying Terraform, CDK and CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/gitlab-ci/README.md)
 
 ## Benefits
 1. ***Standardisation & consistency*** : Standardised Pipeline for any type of Infrastructure brings in consistency in infrastructure deployment.
@@ -86,7 +86,7 @@ There are multiple aspects of accesses while working or using DPA templates:
 2. Service account to be used for pipeline execution and deployment to cloud environments. [Example Policy](https://docs.aws.amazon.com/codepipeline/latest/userguide/security-iam-id-policies-examples.html)
 3. Pipelines uses least privileges IAM roles to access AWS resources like ECR docker images, SNS and distribution list in pipeline job execution
 4. Pipelines should be protected with limited access to avoid unwanted updates on pipeline configs and deletion
-5. Gitlab to AWS Integration is via the Environment variables configured and explained [here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md#usage)
+5. Gitlab to AWS Integration is via the Environment variables configured and explained [here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/gitlab-ci/README.md#usage)
 6. CodeBuild Artefacts can be encrypted using CMK, [outlined here](https://docs.aws.amazon.com/codebuild/latest/userguide/security-encryption.html)
 
 ## Examples

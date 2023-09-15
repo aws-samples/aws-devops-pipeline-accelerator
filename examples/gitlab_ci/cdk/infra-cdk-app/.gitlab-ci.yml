@@ -1,15 +1,15 @@
 ---
 variables:
   AWS_REGION: us-east-1
-  DEV_AWS_ACCOUNT: 316172404479
-  DEV_ARN_ROLE: arn:aws:iam::316172404479:role/dpa-gitlab-access-role
+  DEV_AWS_ACCOUNT: ************
+  DEV_ARN_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
   DEV_DEPLOY: "false"
   DEV_ENV: "dev"
-  INT_AWS_ACCOUNT: 448599500132
-  INT_ARN_ROLE: arn:aws:iam::448599500132:role/dpa-gitlab-access-role
+  INT_AWS_ACCOUNT: ************
+  INT_ARN_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
   INT_DEPLOY: "true"
   INT_ENV: "dev"
-  AWS_CREDS_TARGET_ROLE: arn:aws:iam::448599500132:role/dpa-gitlab-access-role
+  AWS_CREDS_TARGET_ROLE: arn:aws:iam::************:role/dpa-gitlab-access-role
   TERRAFORM_TEST_CHECKOV: "false"
   TERRAFORM_TEST_TERRASCAN: "true"
 
