@@ -77,7 +77,8 @@ The pipeline stops/exits on encountering a failure at any of the below stages. T
 * Workflow templates for Infrastructure based applications for Amazon CodeCatalyst, Github Actions and Jenkins
 * Java based application pipeline templates that deploys to container ecosystem like ECS and EKS
 * Frontend UI based application pipeline templates for deployment to AWS environments
-* Enable Multi-Account and Cross-Region provsioning and deployment 
+* Enable Multi-Account and Cross-Region provsioning and deployment
+* CodeBuild artifact KMS encryption using CMK.
 
 ## Access Management
 There are multiple aspects of accesses while working or using DPA templates:
@@ -86,6 +87,7 @@ There are multiple aspects of accesses while working or using DPA templates:
 3. Pipelines uses least privileges IAM roles to access AWS resources like ECR docker images, SNS and distribution list in pipeline job execution
 4. Pipelines should be protected with limited access to avoid unwanted updates on pipeline configs and deletion
 5. Gitlab to AWS Integration is via the Environment variables configured and explained [here](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/feature/repo-structure/gitlab-ci/README.md#usage)
+6. CodeBuild Artefacts can be encrypted using CMK, [outlined here](https://docs.aws.amazon.com/codebuild/latest/userguide/security-encryption.html)
 
 ## Examples
 There is an Examples folder included in this solution to showcase how to integrate/use the DPA solution in your repositories. 
