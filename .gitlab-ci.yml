@@ -1,3 +1,0 @@
----
-include:
-  - local: gitlab-ci/test-pipeline/entrypoint-tests.yml
