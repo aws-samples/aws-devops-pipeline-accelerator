@@ -68,7 +68,7 @@ The pipeline stops/exits on encountering a failure at any of the below stages. T
 
 ## Deployment
 1. [AWS CodePipeline for deploying Terraform resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/aws-codepipeline/terraform/README.md)
-2. [AWS CodePipeline for deploying CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/aws-codepipeline/terraform/README.md)
+2. [AWS CodePipeline for deploying CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/aws-codepipeline/cloudformation/README.md)
 3. [Gitlab CI for deploying Terraform, CDK and CloudFormation resources](https://github.com/aws-samples/aws-devops-pipeline-accelerator/blob/main/gitlab-ci/README.md)
 
 ## Benefits
