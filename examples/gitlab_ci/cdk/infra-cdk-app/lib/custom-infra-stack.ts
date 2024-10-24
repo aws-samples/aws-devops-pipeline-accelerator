@@ -76,7 +76,7 @@ export class CustomInfraStack extends cdk.Stack {
       "allow ICMP traffic from a specific IP range"
     );
 
-    const cdkrole = iam.Role.fromRoleArn(this, 'Role', 'arn:aws:iam::316172404479:role/cdk-role', {
+    const cdkrole = iam.Role.fromRoleArn(this, 'Role', 'arn:aws:iam::XXXXXXXXXXXXX:role/cdk-role', {
       mutable: false,
     });
     var name = "test-value";
