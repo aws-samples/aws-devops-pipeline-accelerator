@@ -1,7 +1,6 @@
 project_name       = "devops_pipeline_accelerator_tech"
 environment        = "dev"
 backend_s3_bucket_arn = "arn:aws:s3:::tf-state-dpa"
-backend_ddb_arn    = "arn:aws:dynamodb:us-east-1:xxxxxxxxxxxx:table/tf-state-dpa"
 create_new_repo    = false
 source_repo_name   = "devops_pipeline_accelerator"
 source_repo_branch = "main"

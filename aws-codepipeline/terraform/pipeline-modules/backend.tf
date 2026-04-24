@@ -1,5 +1,4 @@
-/*# Backend must remain commented until the Bucket
-and the DynamoDB table are created. 
+/*# Backend must remain commented until the Bucket is created. 
 After the creation you can uncomment it,
 run "terraform init" and then "terraform apply" */
 
@@ -8,7 +7,7 @@ terraform {
     bucket         = "terraform-state-fg"
     key            = "terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform-state-fg"
+    use_lockfile = true
     encrypt        = true
   }
 }
@@ -49,21 +48,4 @@ terraform {
 #   block_public_policy = true
 #   restrict_public_buckets = true
 #   ignore_public_acls  = true
-# }
-
-# resource "aws_dynamodb_table" "terraform-lock" {
-#     name           = "terraform-state-fg"
-#       #checkov:skip=CKV_AWS_28:Ensure Dynamodb point in time recovery (backup) is enabled
-#       #checkov:skip=CKV_AWS_119:Ensure DynamoDB Tables are encrypted using a KMS Customer Managed CMK
-#       #checkov:skip=CKV2_AWS_16:Ensure that Auto Scaling is enabled on your DynamoDB tables
-#     read_capacity  = 5
-#     write_capacity = 5
-#     hash_key       = "LockID"
-#     attribute {
-#         name = "LockID"
-#         type = "S"
-#     }
-#     tags = {
-#         "Name" = "DynamoDB Terraform State Lock Table"
-#     }
 # }

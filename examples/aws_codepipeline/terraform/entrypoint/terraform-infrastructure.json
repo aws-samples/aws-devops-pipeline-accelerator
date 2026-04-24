@@ -8,5 +8,5 @@
     "bucket":"tf-state-dpa",
     "key":"terraform_test.tfstate",
     "region":"us-east-1",
-    "dynamodb_table":"tf-state-dpa"
+    "use_lockfile":"true"
 }

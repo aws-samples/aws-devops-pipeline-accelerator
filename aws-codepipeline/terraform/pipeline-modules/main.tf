@@ -5,7 +5,7 @@
 #Amazon Web Services, Inc. or Amazon Web Services EMEA SARL or both.
 
 terraform {
-  required_version = ">= 1.0.0"
+  required_version = ">= 1.11.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -62,7 +62,6 @@ module "codebuild_iam_role" {
   kms_key_arn                = module.codepipeline_kms.arn
   s3_bucket_arn              = module.s3_artifacts_bucket.arn
   backend_s3_bucket_arn      = var.backend_s3_bucket_arn
-  backend_ddb_arn            = var.backend_ddb_arn
   crossaccount_role_arn      = var.crossaccount_role_arn
   tags = {
     Project_Name = var.project_name
@@ -107,7 +106,6 @@ module "codepipeline_iam_role" {
   kms_key_arn                = module.codepipeline_kms.arn
   s3_bucket_arn              = module.s3_artifacts_bucket.arn
   backend_s3_bucket_arn      = var.backend_s3_bucket_arn
-  backend_ddb_arn            = var.backend_ddb_arn
   crossaccount_role_arn      = var.crossaccount_role_arn
   tags = {
     Project_Name = var.project_name
