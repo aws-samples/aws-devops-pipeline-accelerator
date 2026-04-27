@@ -6,7 +6,7 @@ source "$(dirname "$0")"/cdk-set-variables.sh
 #     -backend-config="bucket=devops-accelerator-state-${AWS_REGION}-${AWS_ACCOUNT}" \
 #     -backend-config="key=${PROJECT}/${JOB}.terraform.tfstate" \
 #     -backend-config="region=${AWS_REGION}" \
-#     -backend-config="dynamodb_table=dynamo-db-devops-accelerator-state-${AWS_REGION}-${AWS_ACCOUNT}" \
+#     -backend-config="use_lockfile=true" \
 #     -backend-config="encrypt=false"
 
 

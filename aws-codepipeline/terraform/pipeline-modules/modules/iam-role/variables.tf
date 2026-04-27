@@ -55,11 +55,6 @@ variable "backend_s3_bucket_arn" {
   type        = string
 }
 
-variable "backend_ddb_arn" {
-  description = "The ARN of the S3 Bucket"
-  type        = string
-}
-
 variable "crossaccount_role_arn" {
   description = "The ARN of the S3 Bucket"
   type        = string

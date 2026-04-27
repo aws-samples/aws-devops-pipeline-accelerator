@@ -11,7 +11,6 @@ phases:
     commands:
       - PIPELINE_CONFIG_JSON=$CODEBUILD_SRC_DIR_SourceOutput1/entrypoint/terraform-infrastructure.json
       - bucket=$( cat $PIPELINE_CONFIG_JSON | jq -r '.bucket')
-      - dynamodb_table=$( cat $PIPELINE_CONFIG_JSON | jq -r '.dynamodb_table')
       - key=$( cat $PIPELINE_CONFIG_JSON | jq -r '.key')
       - region=$( cat $PIPELINE_CONFIG_JSON | jq -r '.region')
 
@@ -30,7 +29,7 @@ phases:
         else
           terraform init -lock=false  \
             -backend-config="bucket=$bucket" \
-            -backend-config="dynamodb_table=$dynamodb_table" \
+            -backend-config="use_lockfile=true" \
             -backend-config="key=$key" \
             -backend-config="region=$region" \
             -backend-config="encrypt=false"

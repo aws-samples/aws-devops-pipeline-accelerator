@@ -143,16 +143,13 @@ resource "aws_iam_policy" "codepipeline_policy" {
     },
     {
       "Effect": "Allow",
-      "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+      "Action": ["s3:GetObject", "s3:PutObject"],
       "Resource": "${var.backend_s3_bucket_arn}/*"
     },
     {
       "Effect": "Allow",
-      "Action": ["dynamodb:DescribeTable",
-        "dynamodb:GetItem",
-        "dynamodb:PutItem",
-        "dynamodb:DeleteItem"],
-      "Resource": "${var.backend_ddb_arn}"
+      "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+      "Resource": "${var.backend_s3_bucket_arn}/*.tflock"
     },
     {
       "Effect": "Allow",
